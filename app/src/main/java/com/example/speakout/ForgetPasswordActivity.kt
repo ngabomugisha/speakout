@@ -2,19 +2,10 @@ package com.example.speakout
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
 
-
-class MainActivity : AppCompatActivity() {
-
-
-
-
+class ForgetPasswordActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
-        btnLogin
-
+        setContentView(R.layout.activity_townhall)
     }
 }
