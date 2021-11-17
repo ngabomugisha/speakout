@@ -13,7 +13,10 @@ class OrganizerDashboardActivity : AppCompatActivity() {
         recycler=findViewById<RecyclerView>(R.id.recycler_view_holder_id)
 
         val halls:ArrayList<TownHallViewClass> = ArrayList();
-        halls.add(TownHallViewClass("Spring 2021","202-12-01"))
+        for (i in 1..20)
+        {
+            halls.add(TownHallViewClass("Spring 202$i","202-12-01"))
+        }
 
         val adapter= RecyclerViewTownHallAdapter(halls);
         recycler?.adapter=adapter
