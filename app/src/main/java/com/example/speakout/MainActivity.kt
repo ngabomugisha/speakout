@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.speakout.databinding.ActivityMainBinding
 import com.example.speakout.organizer.OrganizerDashboardActivity
+import com.example.speakout.organizer.OrganizerOneTownHallActivity
 import com.example.speakout.organizer.TownHallViewClass
 
 class MainActivity : AppCompatActivity() {
@@ -20,6 +21,17 @@ class MainActivity : AppCompatActivity() {
         to.setOnClickListener {
             toClicked()
         }
+
+        val question=binding.question
+        question.setOnClickListener {
+            questionClicked()
+        }
+    }
+
+    private fun questionClicked()
+    {
+        val intent:Intent=Intent(this,OrganizerOneTownHallActivity::class.java)
+        startActivity(intent)
     }
 
     private fun toClicked() {
