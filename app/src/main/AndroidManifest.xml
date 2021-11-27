@@ -10,11 +10,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SpeakOut">
         <activity
-            android:name=".organizer.OrganizerOneTownHallActivity"
+            android:name=".organizer.activities.OrganizerOneTownHallActivity"
             android:exported="true"
             android:parentActivityName=".MainActivity"/>
         <activity
-            android:name=".organizer.OrganizerDashboardActivity"
+            android:name=".organizer.activities.OrganizerDashboardActivity"
             android:exported="true"
             android:parentActivityName=".MainActivity" />
         <activity

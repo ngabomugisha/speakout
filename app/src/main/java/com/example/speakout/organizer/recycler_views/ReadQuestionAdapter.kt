@@ -1,4 +1,4 @@
-package com.example.speakout.organizer
+package com.example.speakout.organizer.recycler_views
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.speakout.R
-import org.w3c.dom.Text
+import com.example.speakout.organizer.classes.QuestionClass
 
 class ReadQuestionAdapter(private var questions: ArrayList<QuestionClass>) :
     RecyclerView.Adapter<ReadQuestionAdapter.ReadQuestionHolder>() {
@@ -20,7 +20,7 @@ class ReadQuestionAdapter(private var questions: ArrayList<QuestionClass>) :
     }
 
     override fun onBindViewHolder(
-        holder: ReadQuestionAdapter.ReadQuestionHolder,
+        holder: ReadQuestionHolder,
         position: Int
     ) {
         holder.bind(questions[position])

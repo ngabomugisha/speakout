@@ -3,12 +3,9 @@ package com.example.speakout
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
-import androidx.recyclerview.widget.RecyclerView
 import com.example.speakout.databinding.ActivityMainBinding
-import com.example.speakout.organizer.OrganizerDashboardActivity
-import com.example.speakout.organizer.OrganizerOneTownHallActivity
-import com.example.speakout.organizer.TownHallViewClass
+import com.example.speakout.organizer.activities.OrganizerDashboardActivity
+import com.example.speakout.organizer.activities.OrganizerOneTownHallActivity
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -30,7 +27,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun questionClicked()
     {
-        val intent:Intent=Intent(this,OrganizerOneTownHallActivity::class.java)
+        val intent:Intent=Intent(this, OrganizerOneTownHallActivity::class.java)
         startActivity(intent)
     }
 

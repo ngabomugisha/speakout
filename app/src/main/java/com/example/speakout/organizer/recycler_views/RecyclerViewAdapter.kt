@@ -1,4 +1,4 @@
-package com.example.speakout.organizer
+package com.example.speakout.organizer.recycler_views
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.speakout.R
+import com.example.speakout.organizer.classes.TownHallViewClass
 
 class RecyclerViewTownHallAdapter(private var town_halls: ArrayList<TownHallViewClass>) :
     RecyclerView.Adapter<RecyclerViewTownHallAdapter.RecyclerViewTownHallHolder>() {
