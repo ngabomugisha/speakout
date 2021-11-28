@@ -10,7 +10,9 @@ import com.example.speakout.R
 import com.example.speakout.databinding.ActivityMainBinding
 import com.example.speakout.databinding.ActivityViewQuestionsStudentBinding
 import com.example.speakout.general.fragments.ViewTownHallsFragment
+import com.example.speakout.organizer.fragments.CreateTownHallFragment
 import com.example.speakout.organizer.fragments.ViewQuestionsFragment
+import com.example.speakout.student.fragments.PostQuestionFragment
 
 class ViewQuestionsStudentActivity : AppCompatActivity() {
     private lateinit var binding: ActivityViewQuestionsStudentBinding
@@ -29,7 +31,8 @@ class ViewQuestionsStudentActivity : AppCompatActivity() {
     private fun postClicked()
     {
         post_btn.setOnClickListener {
-            Toast.makeText(this, "Yes go", Toast.LENGTH_LONG).show()
+            var dialog = PostQuestionFragment()
+            dialog.show(supportFragmentManager, "DialogFragment")
         }
     }
 

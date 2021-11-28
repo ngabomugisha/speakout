@@ -78,14 +78,29 @@
 
             </androidx.cardview.widget.CardView>
 
-            <Button
-                android:id="@+id/post_question_id"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_margin="30sp"
-                android:text="@string/post"
-                android:textSize="20sp" />
+                android:orientation="horizontal">
+                <Button
+                    android:id="@+id/post_question_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="30sp"
+                    android:text="@string/post"
+                    android:textSize="20sp" />
+                <Button
+                    android:id="@+id/post_question_close"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="30sp"
+                    android:text="Cancel"
+                    android:textSize="20sp" />
+
+            </LinearLayout>
+
         </LinearLayout>
 
     </LinearLayout>
