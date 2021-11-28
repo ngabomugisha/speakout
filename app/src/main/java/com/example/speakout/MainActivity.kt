@@ -3,9 +3,11 @@ package com.example.speakout
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
 import com.example.speakout.databinding.ActivityMainBinding
 import com.example.speakout.organizer.activities.OrganizerDashboardActivity
-import com.example.speakout.organizer.activities.OrganizerOneTownHallActivity
+import com.example.speakout.general.fragments.OrganizerOneTownHallActivity
+import com.example.speakout.student.activities.ViewQuestionsStudentActivity
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -23,6 +25,17 @@ class MainActivity : AppCompatActivity() {
         question.setOnClickListener {
             questionClicked()
         }
+
+        val post=binding.post
+        post.setOnClickListener {
+            postClicked()
+        }
+    }
+
+    private fun postClicked()
+    {
+        val intent:Intent= Intent(this,ViewQuestionsStudentActivity::class.java)
+        startActivity(intent)
     }
 
     private fun questionClicked()

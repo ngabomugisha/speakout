@@ -2,7 +2,7 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="140sp"
     android:layout_margin="3sp"
     app:cardBackgroundColor="@color/townhall_color1"
     app:cardCornerRadius="15sp">
@@ -12,83 +12,130 @@
         android:layout_height="match_parent">
 
         <LinearLayout
-            android:id="@+id/town_hall_name_layout_id"
+            android:id="@+id/upper_layout"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_margin="10sp"
-            android:orientation="vertical"
+            android:orientation="horizontal"
+            app:layout_constraintHeight_percent="0.7"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="20sp">
+            <TextView
+                android:id="@+id/asked_question_id"
+                android:layout_width="240sp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10sp"
+                android:text="comment will go here"
+                android:textSize="20sp" />
 
-                <TextView
-                    android:id="@+id/asked_question_id"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="question asked in town hall"
-                    android:textColor="@color/black"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintWidth_percent="0.7" />
+            <TextView
+                android:id="@+id/date_asked"
+                android:layout_width="130sp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10sp"
+                android:gravity="center_horizontal"
+                android:text="2021-12-31" />
+        </LinearLayout>
 
-                <TextView
-                    android:id="@+id/date_asked"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="date asked on"
-                    android:textColor="@color/black"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/asked_question_id"
-                    app:layout_constraintTop_toTopOf="parent" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/upper_layout">
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/question_asker_org_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20sp"
+                android:text="Robert Ngabo"
+                android:textSize="20sp" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20sp"
+                android:text="comments: " />
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/comm_num_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40sp"
+                android:text="comments: 12" />
 
-                    <TextView
-                        android:id="@+id/question_asker_org_id"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:text="Jean Paul Nishimirwe"
-                        android:textColor="@color/black"
-                        android:textSize="13sp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintWidth_percent="0.5" />
+            <ImageButton
+                android:layout_width="60sp"
+                android:layout_height="60sp"
+                android:layout_marginLeft="20sp"
+                android:layout_marginTop="-20sp"
+                android:layout_marginBottom="10sp"
+                android:src="@drawable/thumb_up_24" />
 
-                    <TextView
-                        android:id="@+id/comments_or_id"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:text="comment"
-                        android:textColor="@color/black"
-                        app:layout_constraintStart_toEndOf="@id/question_asker_org_id"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintWidth_percent="0.3" />
+            <TextView
+                android:id="@+id/votes_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="10" />
 
-                    <TextView
-                        android:id="@+id/comm_num_id"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:text="10"
-                        android:textColor="@color/black"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/comments_or_id"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintWidth_percent="0.3" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </LinearLayout>
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
+    <!--    <androidx.constraintlayout.widget.ConstraintLayout-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent">-->
+
+    <!--        <LinearLayout-->
+    <!--            android:id="@+id/town_hall_name_layout_id"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="match_parent"-->
+    <!--            android:layout_margin="10sp"-->
+    <!--            android:orientation="vertical"-->
+    <!--            app:layout_constraintStart_toStartOf="parent"-->
+    <!--            app:layout_constraintTop_toTopOf="parent">-->
+
+    <!--            <androidx.constraintlayout.widget.ConstraintLayout-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="match_parent"-->
+    <!--                android:layout_marginBottom="20sp">-->
+
+
+    <!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+    <!--            <LinearLayout-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="wrap_content">-->
+
+    <!--                <androidx.constraintlayout.widget.ConstraintLayout-->
+    <!--                    android:layout_width="match_parent"-->
+    <!--                    android:layout_height="match_parent">-->
+
+    <!--                    <TextView-->
+    <!--                        android:id="@+id/question_asker_org_id"-->
+    <!--                        android:layout_width="0dp"-->
+    <!--                        android:layout_height="wrap_content"-->
+    <!--                        android:text="Jean Paul Nishimirwe"-->
+    <!--                        android:textColor="@color/black"-->
+    <!--                        android:textSize="13sp"-->
+    <!--                        app:layout_constraintStart_toStartOf="parent"-->
+    <!--                        app:layout_constraintTop_toTopOf="parent"-->
+    <!--                        app:layout_constraintWidth_percent="0.5" />-->
+
+
+    <!--                    <TextView-->
+    <!--                        android:id="@+id/comm_num_id"-->
+    <!--                        android:layout_width="0dp"-->
+    <!--                        android:layout_height="wrap_content"-->
+    <!--                        android:text="10"-->
+    <!--                        android:textColor="@color/black"-->
+    <!--                        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--                        app:layout_constraintStart_toEndOf="@id/comments_or_id"-->
+    <!--                        app:layout_constraintTop_toTopOf="parent"-->
+    <!--                        app:layout_constraintWidth_percent="0.3" />-->
+
+    <!--                </androidx.constraintlayout.widget.ConstraintLayout>-->
+    <!--            </LinearLayout>-->
+    <!--        </LinearLayout>-->
+    <!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
 </androidx.cardview.widget.CardView>
