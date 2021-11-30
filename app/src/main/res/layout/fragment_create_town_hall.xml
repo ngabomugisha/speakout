@@ -8,6 +8,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:minWidth="600sp"
         android:orientation="vertical">
 
         <LinearLayout
@@ -17,13 +18,14 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="150sp"
+                android:layout_width="wrap_content"
+                android:minWidth="100sp"
                 android:layout_height="match_parent"
                 android:text="@string/date"
-                android:textSize="30sp" />
+                android:textSize="20sp" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="200sp"
+                android:layout_width="match_parent"
                 android:layout_height="60sp">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -42,13 +44,14 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="150sp"
+                android:layout_width="wrap_content"
+                android:minWidth="100sp"
                 android:layout_height="match_parent"
                 android:text="@string/start"
-                android:textSize="30sp" />
+                android:textSize="20sp" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="200sp"
+                android:layout_width="match_parent"
                 android:layout_height="60sp">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -67,13 +70,14 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="150sp"
+                android:layout_width="wrap_content"
+                android:minWidth="100sp"
                 android:layout_height="match_parent"
                 android:text="@string/end"
-                android:textSize="30sp" />
+                android:textSize="20sp" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="200sp"
+                android:layout_width="match_parent"
                 android:layout_height="60sp">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -92,14 +96,15 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="150sp"
+                android:layout_width="wrap_content"
+                android:minWidth="100sp"
                 android:layout_height="match_parent"
                 android:text="@string/details"
-                android:textSize="30sp" />
+                android:textSize="20sp" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="200sp"
-                android:layout_height="150sp">
+                android:layout_width="match_parent"
+                android:layout_height="100sp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/town_hall_details_id"
@@ -120,18 +125,16 @@
             <Button
                 android:id="@+id/town_hall_start_btn_id"
                 android:layout_width="wrap_content"
-                android:layout_height="70sp"
+                android:layout_height="wrap_content"
                 android:layout_margin="10sp"
-                android:text="@string/create"
-                android:textSize="20sp" />
+                android:text="@string/create"/>
 
             <Button
                 android:id="@+id/town_hall_close_btn_id"
                 android:layout_width="wrap_content"
-                android:layout_height="70sp"
+                android:layout_height="wrap_content"
                 android:layout_margin="10sp"
-                android:text="@string/close"
-                android:textSize="20sp" />
+                android:text="@string/close" />
 
 
         </LinearLayout>
