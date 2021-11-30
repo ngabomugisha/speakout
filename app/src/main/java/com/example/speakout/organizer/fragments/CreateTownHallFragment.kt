@@ -21,6 +21,7 @@ import java.util.*
 import android.widget.DatePicker
 
 import android.app.Dialog
+import com.example.speakout.organizer.classes.SelectDateFragment
 
 
 class CreateTownHallFragment : DialogFragment()
@@ -29,12 +30,13 @@ class CreateTownHallFragment : DialogFragment()
     private var start:TextView?=null;
     private var end:TextView?=null;
     private var details:TextInputEditText?=null;
-    private var dateChoice:String?=null
 
     private var town_hall_close_btn_id:Button?= null
     private var town_hall_create_btn_id:Button?= null
     private val database=Firebase.database
     private val reference=database.getReference("speak_out")
+
+    private var newFragment: DialogFragment?=null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -45,21 +47,11 @@ class CreateTownHallFragment : DialogFragment()
         creat_Town_Hall(rootView)
         closeDialog(rootView)
 
-        // handling select dates on view clicks
-        date!!.setOnClickListener { view->
-            dateChoice="date"
-            clickDatePicker(view)
-        }
+        // handling select dates
+        dateClicked()
+        selectStartDate()
+        selectEndDate()
 
-        start!!.setOnClickListener { view->
-            dateChoice="start"
-            clickDatePicker(view)
-        }
-
-        end!!.setOnClickListener { view->
-            dateChoice="end"
-            clickDatePicker(view)
-        }
         return rootView
     }
 
@@ -98,50 +90,36 @@ class CreateTownHallFragment : DialogFragment()
         return true;
     }
 
-    private fun clickDatePicker(view:View)
+    private fun clickDatePicker(view:View, a:String)
     {
-        val newFragment: DialogFragment = SelectDateFragment()
-        newFragment.show(requireFragmentManager(), "DatePicker")
+        newFragment = SelectDateFragment()
+        (newFragment as SelectDateFragment).show(requireFragmentManager(), "DatePicker")
+        (view as TextView).text = (newFragment as SelectDateFragment).getDate()
+        (newFragment as SelectDateFragment).setRootView(view)
+        (newFragment as SelectDateFragment).setTextView(a)
     }
 
-    // inner class to help us display DatePickerFragment
-    inner class SelectDateFragment : DialogFragment(),
-        OnDateSetListener {
-        override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-            val calendar = Calendar.getInstance()
-            val yy = calendar[Calendar.YEAR]
-            val mm = calendar[Calendar.MONTH]
-            val dd = calendar[Calendar.DAY_OF_MONTH]
-            return DatePickerDialog(requireActivity(), this, yy, mm, dd)
-        }
-
-        override fun onDateSet(view: DatePicker, yy: Int, mm: Int, dd: Int) {
-            populateSetDate(yy, mm + 1, dd)
-        }
-
-        private fun populateSetDate(year: Int, month: Int, day: Int)
-        {
-            decideView()!!.text="$month/$day/$year"
-        }
-        private fun decideView(): TextView?
-        {
-            if(dateChoice.equals("date"))
-            {
-                return date
-            }
-            else if(dateChoice.equals("start"))
-            {
-                return start
-            }
-            else if(dateChoice.equals("end"))
-            {
-                return  end
-            }
-            else
-            {
-                return date
-            }
+    // When Town_hall date is clicked, the following codes allows to select the date
+    private fun dateClicked()
+    {
+        date!!.setOnClickListener { view->
+            clickDatePicker(view,"date")
         }
     }
 
+    // When start date is clicked, the following codes allows to select the date
+    private fun selectStartDate()
+    {
+        start!!.setOnClickListener { view->
+            clickDatePicker(view, "start")
+        }
+    }
+
+    // When end date is clicked, the following codes allows to select the date
+    private fun selectEndDate()
+    {
+        end!!.setOnClickListener { view->
+            clickDatePicker(view, "end")
+        }
+    }
 }
