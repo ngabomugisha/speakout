@@ -1,7 +1,9 @@
 package com.example.speakout.organizer.activities
 
+import android.app.DatePickerDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.FragmentManager
@@ -13,6 +15,7 @@ import com.example.speakout.organizer.classes.TownHallViewClass
 import com.example.speakout.organizer.fragments.CreateTownHallFragment
 import com.example.speakout.organizer.fragments.ViewQuestionsFragment
 import com.example.speakout.organizer.recycler_views.RecyclerViewTownHallAdapter
+import java.util.*
 
 class OrganizerDashboardActivity : AppCompatActivity() {
     private var beginTownHall:Button?=null;
@@ -37,10 +40,11 @@ class OrganizerDashboardActivity : AppCompatActivity() {
     }
 
     private fun clickable() {
-        beginTownHall?.setOnClickListener {
+        beginTownHall?.setOnClickListener { view->
             Toast.makeText(this, "Here we gon start a new Town Hall", Toast.LENGTH_LONG).show()
             var dialog = CreateTownHallFragment()
             dialog.show(supportFragmentManager, "DialogFragment")
         }
     }
+
 }

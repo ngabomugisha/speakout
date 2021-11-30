@@ -2,6 +2,7 @@ package com.example.speakout.organizer.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Layout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.speakout.R
 import com.example.speakout.organizer.classes.QuestionClass
@@ -9,6 +10,7 @@ import com.example.speakout.organizer.recycler_views.ReadQuestionAdapter
 
 class OrganizerOneTownHallActivity : AppCompatActivity() {
     private var recycler: RecyclerView?=null;
+    private var lay:Layout?=null;
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_organizer_one_town_hall)
