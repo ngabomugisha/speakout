@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello_blank_fragment">Hello vide fragment</string>
+    <string name="create_townhall">Creer town hall</string>
+    <string name="date">Date</string>
+    <string name="post">publier</string>
+    <string name="start">debut</string>
+    <string name="end">Fin</string>
+    <string name="details">detailles</string>
+    <string name="create">creer</string>
+    <string name="comment">Commentaire</string>
+    <string name="add">ajouter</string>
+    <string name="login">connecter</string>
+    <string name="close">fermer</string>
+    <string name="signup">Creer un nouveau compte</string>
+    <string name="view">afficher</string>
+    <string name="save">enregistrer</string>
+    <string name="cancel">Annuler</string>
+    <string name="vote">voter</string>
+</resources>
