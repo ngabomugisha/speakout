@@ -55,10 +55,10 @@ import java.util.*
         {
             v=root!!.findViewById(R.id.town_hall_end_date_id)
         }
-
     }
 
-    private fun populateSetDate(year: Int, month: Int, day: Int) {
+    private fun populateSetDate(year: Int, month: Int, day: Int)
+    {
         v!!.text = "$month/$day/$year"
     }
 }

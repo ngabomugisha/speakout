@@ -21,7 +21,14 @@ import java.util.*
 import android.widget.DatePicker
 
 import android.app.Dialog
+import com.example.speakout.general.Townhall
 import com.example.speakout.organizer.classes.SelectDateFragment
+import com.example.speakout.utils.Helper
+import com.example.speakout.MainActivity
+
+import androidx.annotation.NonNull
+import com.google.firebase.database.*
+import java.sql.Time
 
 
 class CreateTownHallFragment : DialogFragment()
@@ -33,14 +40,14 @@ class CreateTownHallFragment : DialogFragment()
 
     private var town_hall_close_btn_id:Button?= null
     private var town_hall_create_btn_id:Button?= null
-    private val database=Firebase.database
-    private val reference=database.getReference("speak_out")
+    private var database: DatabaseReference? = null
 
     private var newFragment: DialogFragment?=null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        database = FirebaseDatabase.getInstance().getReference("speak_out")
         // Inflate the layout for this fragment
         var rootView = inflater.inflate(R.layout.fragment_create_town_hall, container, false)
         setInputFields(rootView)
@@ -74,19 +81,45 @@ class CreateTownHallFragment : DialogFragment()
             dismiss()
         }
     }
-        private fun creat_Town_Hall(rootView: View) {
-            town_hall_create_btn_id = rootView.findViewById(R.id.town_hall_start_btn_id)
-            town_hall_create_btn_id?.setOnClickListener {
-                if(!fieldsValidate())
-                {
+    private fun creat_Town_Hall(rootView: View) {
+        town_hall_create_btn_id = rootView.findViewById(R.id.town_hall_start_btn_id)
+        town_hall_create_btn_id?.setOnClickListener {
+            if (!fieldsValidate())
+            {
 
-                }
-                Toast.makeText(context, date!!.text.toString()+" "+reference.child("user").toString(), Toast.LENGTH_LONG).show()
+            }
+            else
+            {
+                val d:String=date!!.text.toString()
+                val s:String=start!!.text.toString()
+                val e:String=end!!.text.toString()
+                val det:String=details!!.text.toString()
+                var id=d.replace('/','-')
+
+                val townhall:Townhall= Townhall(id,s,e,d,1,"001",det)
+                database?.child("townhall/${townhall.getTownhallId()}")?.setValue(townhall)
+                Toast.makeText(context,"Townhall saved successfully",Toast.LENGTH_LONG).show()
             }
         }
+    }
 
     private fun fieldsValidate(): Boolean
     {
+        val d:String=date!!.text.toString()
+        val s:String=start!!.text.toString()
+        val e:String=end!!.text.toString()
+        val det:String=details!!.text.toString()
+
+        if(d.trim().isEmpty() || s.trim().isEmpty() || e.trim().isEmpty())
+        {
+            Toast.makeText(context, "Please, all fields are required", Toast.LENGTH_LONG)
+            .show()
+            return false
+        }
+        else if(2==3) // replace this to date start date, and end date validation
+        {
+            return false
+        }
         return true;
     }
 
