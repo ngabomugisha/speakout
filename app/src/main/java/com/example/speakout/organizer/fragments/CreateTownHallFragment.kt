@@ -27,6 +27,8 @@ import com.example.speakout.utils.Helper
 import com.example.speakout.MainActivity
 
 import androidx.annotation.NonNull
+import com.example.speakout.organizer.classes.TownHallViewClass
+import com.example.speakout.organizer.recycler_views.RecyclerViewTownHallAdapter
 import com.google.firebase.database.*
 import java.sql.Time
 
@@ -37,6 +39,7 @@ class CreateTownHallFragment : DialogFragment()
     private var start:TextView?=null;
     private var end:TextView?=null;
     private var details:TextInputEditText?=null;
+    private var count:Int=0;
 
     private var town_hall_close_btn_id:Button?= null
     private var town_hall_create_btn_id:Button?= null
@@ -90,15 +93,29 @@ class CreateTownHallFragment : DialogFragment()
             }
             else
             {
-                var d:String=date!!.text.toString()
-                val s:String=Helper.changeDate(start!!.text.toString())
-                val e:String=Helper.changeDate(end!!.text.toString())
-                val det:String=details!!.text.toString()
-                var id=Helper.changeDate(d)
-                d=Helper.changeDate(d)
+                database?.addValueEventListener(object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
 
-                val townhall:Townhall= Townhall(id,s,e,d,1,"001",det)
-                database?.child("townhall/${townhall.getTownhallId()}")?.setValue(townhall)
+                        if(snapshot.exists())
+                        {
+                            count= snapshot.child("townhall").childrenCount.toInt()
+                        }
+                        count++
+                        var d:String=date!!.text.toString()
+                        val s:String=Helper.changeDate(start!!.text.toString())
+                        val e:String=Helper.changeDate(end!!.text.toString())
+                        val det:String=details!!.text.toString()
+                        var id=Helper.changeDate(d)
+                        d=Helper.changeDate(d)
+
+
+                        val townhall:Townhall= Townhall(id,count,s,e,d,1,"001",det)
+                        database?.child("townhall/${townhall.getTownhallId()}")?.setValue(townhall)
+                    }
+                    override fun onCancelled(error: DatabaseError) {
+
+                    }
+                })
                 Toast.makeText(context,"Townhall saved successfully",Toast.LENGTH_LONG).show()
             }
         }
@@ -156,4 +173,8 @@ class CreateTownHallFragment : DialogFragment()
             clickDatePicker(view, "end")
         }
     }
+}
+
+private fun DatabaseReference?.addChildEventListener(valueEventListener: ValueEventListener) {
+
 }

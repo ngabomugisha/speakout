@@ -48,14 +48,19 @@ class ViewTownHallsFragment : Fragment() {
                 var townhalls=snapshot.child("townhall").children
                 var l:ArrayList<String> = ArrayList()
                 var i:Int=0
-                townhalls.forEach { _ ->
+                val halls:ArrayList<TownHallViewClass> = ArrayList();
+                townhalls.forEach {
                     if(i!=0)
                     {
-                        val t:Townhall=
+                        val townhall_id:String=it.child("townhallId").value.toString()
+                        val townhall_details:String=it.child("details").value.toString()
+                        val townhall_date:String=it.child("liveDate").value.toString()
+                        halls.add(TownHallViewClass(townhall_details,townhall_date))
                     }
                     i++
                 }
-                Toast.makeText(context,"$i",Toast.LENGTH_LONG).show()
+                val adapter= RecyclerViewTownHallAdapter(halls);
+                recycler?.adapter=adapter
             }
             override fun onCancelled(error: DatabaseError) {
                 // calling on cancelled method when we receive
@@ -63,13 +68,5 @@ class ViewTownHallsFragment : Fragment() {
                 Toast.makeText(context, "Fail to get data.", Toast.LENGTH_SHORT).show()
             }
         })
-//        val halls:ArrayList<TownHallViewClass> = ArrayList();
-//        for (i in 1..30)
-//        {
-//            halls.add(TownHallViewClass("Spring 202$i","202-12-01"))
-//        }
-//
-//        val adapter= RecyclerViewTownHallAdapter(halls);
-//        recycler?.adapter=adapter
     }
 }

@@ -2,7 +2,7 @@ package com.example.speakout.general
 
 import java.util.*
 
-class Townhall(private var townhall_id:String, private var startDate:String,
+class Townhall(private var townhall_id:String, private var townhall_count:Int, private var startDate:String,
 private var endDate:String, private var live_date:String,
 private var status:Int=1, private var organizer_id:String, private var details:String)
 {
@@ -14,6 +14,7 @@ private var status:Int=1, private var organizer_id:String, private var details:S
     fun getStatus()=status
     fun getOrganizerId()=organizer_id
     fun getDetails()=details
+    fun getCount()=townhall_count
 
     // setters
     fun setTownhallId(id:String)
