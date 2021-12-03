@@ -1,4 +1,4 @@
-package com.example.speakout.general
+package com.example.speakout.general.classess
 
 class Question (private var question_id:Int, private var question_date:String,
                 private var question_poster:String,private var question_townhall:String,

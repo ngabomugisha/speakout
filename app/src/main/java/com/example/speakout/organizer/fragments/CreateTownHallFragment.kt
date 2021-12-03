@@ -1,7 +1,5 @@
 package com.example.speakout.organizer.fragments
 
-import android.app.DatePickerDialog
-import android.app.DatePickerDialog.OnDateSetListener
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,26 +9,13 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import com.example.speakout.R
-import com.google.android.material.datepicker.DateValidatorPointBackward
 import com.google.android.material.textfield.TextInputEditText
-import com.google.firebase.database.ktx.database
-import com.google.firebase.ktx.Firebase
-import java.lang.Exception
-import java.text.SimpleDateFormat
-import java.util.*
-import android.widget.DatePicker
 
-import android.app.Dialog
-import com.example.speakout.general.Townhall
+import com.example.speakout.general.classess.Townhall
 import com.example.speakout.organizer.classes.SelectDateFragment
 import com.example.speakout.utils.Helper
-import com.example.speakout.MainActivity
 
-import androidx.annotation.NonNull
-import com.example.speakout.organizer.classes.TownHallViewClass
-import com.example.speakout.organizer.recycler_views.RecyclerViewTownHallAdapter
 import com.google.firebase.database.*
-import java.sql.Time
 
 
 class CreateTownHallFragment : DialogFragment()
@@ -109,7 +94,7 @@ class CreateTownHallFragment : DialogFragment()
                         d=Helper.changeDate(d)
 
 
-                        val townhall:Townhall= Townhall(id,count,s,e,d,1,"001",det)
+                        val townhall: Townhall = Townhall(id,count,s,e,d,1,"001",det)
                         database?.child("townhall/${townhall.getTownhallId()}")?.setValue(townhall)
                     }
                     override fun onCancelled(error: DatabaseError) {
@@ -117,6 +102,7 @@ class CreateTownHallFragment : DialogFragment()
                     }
                 })
                 Toast.makeText(context,"Townhall saved successfully",Toast.LENGTH_LONG).show()
+                dismiss()
             }
         }
     }

@@ -18,4 +18,8 @@
     <string name="save">save</string>
     <string name="cancel">cancel</string>
     <string name="vote">vote</string>
+    <string name="andrew_id">Andrew ID</string>
+    <string name="password">Password</string>
+    <string name="login_btn_txt">Login</string>
+    <string name="sign_up">Sign up</string>
 </resources>

@@ -1,9 +1,6 @@
 package com.example.speakout.student.fragments
 
 import android.os.Bundle
-import android.provider.MediaStore
-import android.text.Editable
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,15 +9,11 @@ import android.widget.RadioButton
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import com.example.speakout.R
-import com.example.speakout.general.Question
+import com.example.speakout.general.classess.Question
 import com.example.speakout.utils.DatabaseConnection
 import com.example.speakout.utils.Helper
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
-import java.text.DateFormat
-import java.text.SimpleDateFormat
-import java.util.*
 
 class PostQuestionFragment : DialogFragment()
 {
@@ -65,7 +58,7 @@ class PostQuestionFragment : DialogFragment()
             {
                 val q: String? =question?.text.toString()
                 val date: String =Helper.changeDate(Helper.todayDate())
-                val saveQuestion:Question= Question(1,"$date","001"
+                val saveQuestion: Question = Question(1,"$date","001"
                     ,"11-4-2021","$category","$q")
                 database?.child("question/${saveQuestion.getQuestionId()}")?.setValue(saveQuestion)
                 Toast.makeText(context,"Your question is successfully posted",Toast.LENGTH_LONG).show()

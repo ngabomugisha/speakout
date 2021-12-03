@@ -7,9 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import com.example.speakout.MainActivity
 import com.example.speakout.R
-import com.example.speakout.general.Townhall
 import com.example.speakout.organizer.classes.TownHallViewClass
 import com.example.speakout.organizer.recycler_views.RecyclerViewTownHallAdapter
 import com.example.speakout.utils.DatabaseConnection
