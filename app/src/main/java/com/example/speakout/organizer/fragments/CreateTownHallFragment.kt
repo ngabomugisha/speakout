@@ -90,11 +90,12 @@ class CreateTownHallFragment : DialogFragment()
             }
             else
             {
-                val d:String=date!!.text.toString()
-                val s:String=start!!.text.toString()
-                val e:String=end!!.text.toString()
+                var d:String=date!!.text.toString()
+                val s:String=Helper.changeDate(start!!.text.toString())
+                val e:String=Helper.changeDate(end!!.text.toString())
                 val det:String=details!!.text.toString()
-                var id=d.replace('/','-')
+                var id=Helper.changeDate(d)
+                d=Helper.changeDate(d)
 
                 val townhall:Townhall= Townhall(id,s,e,d,1,"001",det)
                 database?.child("townhall/${townhall.getTownhallId()}")?.setValue(townhall)

@@ -32,7 +32,7 @@ import java.util.*
 
     override fun onDateSet(view: DatePicker, yy: Int, mm: Int, dd: Int)
     {
-        populateSetDate(yy,mm,dd)
+        populateSetDate(yy,mm+1,dd)
     }
 
     fun getDate()=selectedDate

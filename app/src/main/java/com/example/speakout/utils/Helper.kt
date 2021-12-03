@@ -18,5 +18,7 @@ class Helper
             val dateFormat: DateFormat = SimpleDateFormat("MM/dd/yyyy")
             return dateFormat.format(calendar.time)
         }
+
+        fun changeDate(date:String)=date.replace('/','-')
     }
 }

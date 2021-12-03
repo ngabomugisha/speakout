@@ -12,6 +12,7 @@ import android.widget.RadioButton
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import com.example.speakout.R
+import com.example.speakout.general.Question
 import com.example.speakout.utils.DatabaseConnection
 import com.example.speakout.utils.Helper
 import com.google.android.material.textfield.TextInputEditText
@@ -47,13 +48,13 @@ class PostQuestionFragment : DialogFragment()
         CreatePost()
         return rootView
     }
-    fun closeDialog ()
+    private fun closeDialog ()
     {
         post_question_close?.setOnClickListener {
             dismiss()
         }
     }
-    fun CreatePost ()
+    private fun CreatePost ()
     {
         post_question_id?.setOnClickListener {
             if(!validateInput())
@@ -63,8 +64,12 @@ class PostQuestionFragment : DialogFragment()
             else
             {
                 val q: String? =question?.text.toString()
-                val date: String =Helper.todayDate()
-                Toast.makeText(context,"$date",Toast.LENGTH_LONG).show()
+                val date: String =Helper.changeDate(Helper.todayDate())
+                val saveQuestion:Question= Question(1,"$date","001"
+                    ,"11-4-2021","$category","$q")
+                database?.child("question/${saveQuestion.getQuestionId()}")?.setValue(saveQuestion)
+                Toast.makeText(context,"Your question is successfully posted",Toast.LENGTH_LONG).show()
+                question?.setText("")
             }
         }
     }

@@ -9,23 +9,18 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.speakout.R
 import com.example.speakout.organizer.classes.QuestionClass
 import com.example.speakout.organizer.recycler_views.ReadQuestionAdapter
+import com.example.speakout.utils.DatabaseConnection
+import com.google.firebase.database.DatabaseReference
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [ViewQuestionsFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class ViewQuestionsFragment : Fragment() {
     private var recycler: RecyclerView?=null;
+    private var database:DatabaseReference?=null;
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        // connecting to database
+        database=DatabaseConnection.connect()
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_view_questions, container, false)
     }
@@ -34,6 +29,11 @@ class ViewQuestionsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         recycler= activity?.findViewById<RecyclerView>(R.id.organizer_questions_recy_vw_id)
+       getQuestions()
+    }
+
+    private fun getQuestions()
+    {
         val questions:ArrayList<QuestionClass> = ArrayList();
         var p:String?=null;
         for (i in 1..30)
