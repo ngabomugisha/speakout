@@ -5,7 +5,7 @@ import com.example.speakout.general.classess.User
 interface Select
 {
     fun selectTownHalls()
-    fun selectQuestion()
+    fun selectQuestion(townhall:String)
     fun selectComments(question:Int)
     fun selectUser(andrew:String,password:String):User?
 }

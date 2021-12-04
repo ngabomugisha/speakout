@@ -4,6 +4,7 @@ import android.widget.Toast
 import com.example.speakout.general.classess.Question
 import com.example.speakout.general.classess.Townhall
 import com.example.speakout.general.classess.User
+import com.example.speakout.organizer.classes.QuestionClass
 import com.example.speakout.utils.Helper
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -30,14 +31,27 @@ class DatabaseProvider:Insert,Select, Update
         TODO("Not yet implemented")
     }
 
-    override fun selectQuestion()
+    override fun selectQuestion(townhall:String)
     {
-        TODO("Not yet implemented")
+
     }
 
     override fun selectComments(question: Int)
     {
-        TODO("Not yet implemented")
+        val questions:ArrayList<QuestionClass> = ArrayList();
+        var user_reference=database.child("question/$question")
+        user_reference?.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if(snapshot.exists())
+                {
+
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+        })
     }
 
     override fun selectUser(andrew: String, password: String): User?

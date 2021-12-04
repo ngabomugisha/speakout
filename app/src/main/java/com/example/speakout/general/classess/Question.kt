@@ -1,11 +1,12 @@
 package com.example.speakout.general.classess
 
-class Question ( private var question_date:String,
+class Question (private var question_date:String,
                 private var question_poster:String,private var question_townhall:String,
                 private var question_category:String, private var content:String)
 {
     private var question_status:Int?=null;
     private var question_id:Int?=null;
+    private var parent:Int?=null;
     init
     {
         question_status=1
@@ -18,6 +19,7 @@ class Question ( private var question_date:String,
     fun getCategory()=question_category
     fun getStatus()=question_status
     fun getContent()=content
+    fun getParent()=parent
 
     fun setId(id:Int)
     {
@@ -26,6 +28,10 @@ class Question ( private var question_date:String,
     fun setStatus(i:Int)
     {
         question_status=i
+    }
+    fun setParent(p:Int?)
+    {
+        parent=p
     }
 
     override fun toString(): String
