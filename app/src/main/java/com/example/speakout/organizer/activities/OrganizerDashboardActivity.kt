@@ -15,6 +15,8 @@ import com.example.speakout.organizer.classes.TownHallViewClass
 import com.example.speakout.organizer.fragments.CreateTownHallFragment
 import com.example.speakout.organizer.fragments.ViewQuestionsFragment
 import com.example.speakout.organizer.recycler_views.RecyclerViewTownHallAdapter
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import java.util.*
 
 class OrganizerDashboardActivity : AppCompatActivity() {
@@ -31,7 +33,6 @@ class OrganizerDashboardActivity : AppCompatActivity() {
 
     private fun startFragment()
     {
-
         val manager: FragmentManager = supportFragmentManager
         val transaction: FragmentTransaction = manager.beginTransaction()
         transaction.setReorderingAllowed(true)
@@ -40,8 +41,8 @@ class OrganizerDashboardActivity : AppCompatActivity() {
     }
 
     private fun clickable() {
-        beginTownHall?.setOnClickListener { view->
-            Toast.makeText(this, "Here we gon start a new Town Hall", Toast.LENGTH_LONG).show()
+        beginTownHall?.setOnClickListener {
+
             var dialog = CreateTownHallFragment()
             dialog.show(supportFragmentManager, "DialogFragment")
         }

@@ -32,7 +32,7 @@ import java.util.*
 
     override fun onDateSet(view: DatePicker, yy: Int, mm: Int, dd: Int)
     {
-        populateSetDate(yy,mm,dd)
+        populateSetDate(yy,mm+1,dd)
     }
 
     fun getDate()=selectedDate
@@ -55,10 +55,10 @@ import java.util.*
         {
             v=root!!.findViewById(R.id.town_hall_end_date_id)
         }
-
     }
 
-    private fun populateSetDate(year: Int, month: Int, day: Int) {
+    private fun populateSetDate(year: Int, month: Int, day: Int)
+    {
         v!!.text = "$month/$day/$year"
     }
 }

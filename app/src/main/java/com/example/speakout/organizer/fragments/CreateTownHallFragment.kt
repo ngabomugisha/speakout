@@ -1,7 +1,5 @@
 package com.example.speakout.organizer.fragments
 
-import android.app.DatePickerDialog
-import android.app.DatePickerDialog.OnDateSetListener
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,17 +9,14 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import com.example.speakout.R
-import com.google.android.material.datepicker.DateValidatorPointBackward
+import com.example.speakout.content_provider.DatabaseConnection
 import com.google.android.material.textfield.TextInputEditText
-import com.google.firebase.database.ktx.database
-import com.google.firebase.ktx.Firebase
-import java.lang.Exception
-import java.text.SimpleDateFormat
-import java.util.*
-import android.widget.DatePicker
 
-import android.app.Dialog
+import com.example.speakout.general.classess.Townhall
 import com.example.speakout.organizer.classes.SelectDateFragment
+import com.example.speakout.utils.Helper
+
+import com.google.firebase.database.*
 
 
 class CreateTownHallFragment : DialogFragment()
@@ -30,20 +25,22 @@ class CreateTownHallFragment : DialogFragment()
     private var start:TextView?=null;
     private var end:TextView?=null;
     private var details:TextInputEditText?=null;
+    private var count:Int=0;
 
     private var town_hall_close_btn_id:Button?= null
     private var town_hall_create_btn_id:Button?= null
-    private val database=Firebase.database
-    private val reference=database.getReference("speak_out")
+    private var database: DatabaseReference? = null
 
     private var newFragment: DialogFragment?=null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        database = FirebaseDatabase.getInstance().getReference("speak_out")
         // Inflate the layout for this fragment
         var rootView = inflater.inflate(R.layout.fragment_create_town_hall, container, false)
         setInputFields(rootView)
+        updateCount()
         creat_Town_Hall(rootView)
         closeDialog(rootView)
 
@@ -55,6 +52,24 @@ class CreateTownHallFragment : DialogFragment()
         return rootView
     }
 
+    private fun updateCount()
+    {
+        database?.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+
+                if(snapshot.exists())
+                {
+                    count= snapshot.child("townhall").childrenCount.toInt()
+                }
+                count++
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+        })
+    }
+
     private fun setInputFields(rootView: View?)
     {
         date=rootView!!.findViewById<TextInputEditText>(R.id.town_hall_date_id)
@@ -63,10 +78,6 @@ class CreateTownHallFragment : DialogFragment()
         details=rootView!!.findViewById<TextInputEditText>(R.id.town_hall_details_id)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-    }
     fun closeDialog (rootView: View) {
 
         town_hall_close_btn_id = rootView.findViewById(R.id.town_hall_close_btn_id)
@@ -74,19 +85,50 @@ class CreateTownHallFragment : DialogFragment()
             dismiss()
         }
     }
-        private fun creat_Town_Hall(rootView: View) {
-            town_hall_create_btn_id = rootView.findViewById(R.id.town_hall_start_btn_id)
-            town_hall_create_btn_id?.setOnClickListener {
-                if(!fieldsValidate())
-                {
+    private fun creat_Town_Hall(rootView: View) {
+        town_hall_create_btn_id = rootView.findViewById(R.id.town_hall_start_btn_id)
+        town_hall_create_btn_id?.setOnClickListener {
+            if (!fieldsValidate())
+            {
 
-                }
-                Toast.makeText(context, date!!.text.toString()+" "+reference.child("user").toString(), Toast.LENGTH_LONG).show()
+            }
+            else
+            {
+                var d:String=date!!.text.toString()
+                val s:String=Helper.changeDate(start!!.text.toString())
+                val e:String=Helper.changeDate(end!!.text.toString())
+                val det:String=details!!.text.toString()
+                var id=Helper.changeDate(d)
+                d=Helper.changeDate(d)
+
+                val townhall: Townhall = Townhall(id,s,e,d,1,"001",det)
+                townhall.setCount(count)
+                // Inserting via a content provider
+                DatabaseConnection.databaseProvider().insertTownHall(townhall)
+
+                Toast.makeText(context,"Townhall saved successfully",Toast.LENGTH_LONG).show()
+                dismiss()
             }
         }
+    }
 
     private fun fieldsValidate(): Boolean
     {
+        val d:String=date!!.text.toString()
+        val s:String=start!!.text.toString()
+        val e:String=end!!.text.toString()
+        val det:String=details!!.text.toString()
+
+        if(d.trim().isEmpty() || s.trim().isEmpty() || e.trim().isEmpty())
+        {
+            Toast.makeText(context, "Please, all fields are required", Toast.LENGTH_LONG)
+            .show()
+            return false
+        }
+        else if(2==3) // replace this to date start date, and end date validation
+        {
+            return false
+        }
         return true;
     }
 
@@ -116,10 +158,15 @@ class CreateTownHallFragment : DialogFragment()
     }
 
     // When end date is clicked, the following codes allows to select the date
+    //Validating ending data
     private fun selectEndDate()
     {
         end!!.setOnClickListener { view->
             clickDatePicker(view, "end")
         }
     }
+}
+
+private fun DatabaseReference?.addChildEventListener(valueEventListener: ValueEventListener) {
+
 }

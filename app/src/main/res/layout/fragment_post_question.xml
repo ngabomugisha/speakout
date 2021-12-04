@@ -38,14 +38,14 @@
                     android:text="Social Affair" />
 
                 <RadioButton
-                    android:id="@+id/welness_category"
+                    android:id="@+id/welness_category_id"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="10sp"
                     android:text="Welfare" />
 
                 <RadioButton
-                    android:id="@+id/sport_category"
+                    android:id="@+id/sport_category_id"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="10sp"
@@ -69,10 +69,11 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_margin="10sp"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:hint="Type your Question Here">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/quetion_content_id"
+                        android:id="@+id/question_content_id"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" />
                 </com.google.android.material.textfield.TextInputLayout>

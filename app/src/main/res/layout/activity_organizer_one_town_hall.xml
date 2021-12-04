@@ -22,11 +22,11 @@
                 android:id="@+id/edit_townhall_btn_id"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintWidth_percent="0.3"
+                android:layout_margin="10sp"
+                android:text="@string/edit"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:layout_margin="10sp"
-                android:text="Edit" />
+                app:layout_constraintWidth_percent="0.3" />
 
             <Button
                 android:id="@+id/cancel_townhall_btn_id"
