@@ -41,7 +41,25 @@ class DatabaseProvider:Insert,Select, Update
 
     override fun selectUser(andrew: String, password: String)
     {
-        TODO("Not yet implemented")
+        var user_reference=database.child(" user/$andrew")
+//        var user
+        database?.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if(snapshot.exists())
+                {
+
+                }
+                else
+                {
+
+                }
+
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+        });
     }
 
 }

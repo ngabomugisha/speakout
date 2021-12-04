@@ -158,6 +158,7 @@ class CreateTownHallFragment : DialogFragment()
     }
 
     // When end date is clicked, the following codes allows to select the date
+    //Validating ending data
     private fun selectEndDate()
     {
         end!!.setOnClickListener { view->
