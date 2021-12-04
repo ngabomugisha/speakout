@@ -1,8 +1,11 @@
 package com.example.speakout
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import com.example.speakout.databinding.ActivityMainBinding
 import com.example.speakout.general.activities.LoginActivity
 import com.example.speakout.general.fragments.OrganizerOneTownHallActivity
@@ -14,6 +17,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding= ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+//        Getting saved Id during first login
+        val sp: SharedPreferences =getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
+        val savedAndrewId:String?=sp.getString("STRING_KEY", null)
+        Toast.makeText(this,"AndrewId: "+savedAndrewId, Toast.LENGTH_SHORT).show()
 
         val question=binding.question
         question.setOnClickListener {
