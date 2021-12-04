@@ -1,6 +1,7 @@
 package com.example.speakout.content_provider
 
 import android.widget.Toast
+import com.example.speakout.design_patterns.composite.CommentPattern
 import com.example.speakout.general.classess.Question
 import com.example.speakout.general.classess.Townhall
 import com.example.speakout.general.classess.User
@@ -31,27 +32,14 @@ class DatabaseProvider:Insert,Select, Update
         TODO("Not yet implemented")
     }
 
-    override fun selectQuestion(townhall:String)
+    override fun selectQuestion(townhall:String, parent:Int):String
     {
-
+       return ""
     }
 
     override fun selectComments(question: Int)
     {
-        val questions:ArrayList<QuestionClass> = ArrayList();
-        var user_reference=database.child("question/$question")
-        user_reference?.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                if(snapshot.exists())
-                {
-
-                }
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-
-            }
-        })
+       // stub
     }
 
     override fun selectUser(andrew: String, password: String): User?

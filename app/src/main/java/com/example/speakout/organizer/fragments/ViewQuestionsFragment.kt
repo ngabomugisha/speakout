@@ -5,12 +5,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.speakout.R
 import com.example.speakout.organizer.classes.QuestionClass
 import com.example.speakout.organizer.recycler_views.ReadQuestionAdapter
 import com.example.speakout.content_provider.DatabaseConnection
+import com.example.speakout.organizer.classes.TownHallViewClass
+import com.example.speakout.organizer.recycler_views.RecyclerViewTownHallAdapter
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ValueEventListener
 
 class ViewQuestionsFragment : Fragment() {
     private var recycler: RecyclerView?=null;
@@ -34,27 +40,41 @@ class ViewQuestionsFragment : Fragment() {
 
     private fun getQuestions()
     {
-        val questions:ArrayList<QuestionClass> = ArrayList();
-        var p:String?=null;
-        for (i in 1..30)
-        {
-            if(i%2==0)
-            {
-                p="Robert"
+        var question_reference=database?.child("question")
+        var poster_reference=database?.child("user")
+        question_reference?.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if(snapshot.exists())
+                {
+                    var questions=snapshot.children
+                    var i=0
+                    val all_questions:ArrayList<QuestionClass> = ArrayList();
+                    questions.forEach{
+                        if(i!=0)
+                        {
+                            val question_id=it.child("questionId").value.toString()
+                            val content=it.child("content").value.toString()
+                            val date=it.child("date").value.toString()
+                            val poster=it.child("posterId").value.toString()
+                            val num_count=2
+                            all_questions.add(QuestionClass("$content","$poster","$date","$num_count"))
+                        }
+                        i++
+                    }
+                    val adapter= ReadQuestionAdapter(all_questions);
+                    recycler?.adapter=adapter
+                }
+                else
+                {
+                    Toast.makeText(context,"Apana here",Toast.LENGTH_LONG).show()
+                }
             }
-            else if(i%3==0)
-            {
-                p="Venant"
+            override fun onCancelled(error: DatabaseError) {
+                // calling on cancelled method when we receive
+                // any error or we are not able to get the data.
+                Toast.makeText(context, "Fail to get data.", Toast.LENGTH_SHORT).show()
             }
-            else
-            {
-                p="Maurice"
-            }
-            questions.add(QuestionClass("Can we have a pool",p,"2021-3-7","20"))
-        }
-
-        val adapter= ReadQuestionAdapter(questions);
-        recycler?.adapter=adapter
+        })
     }
 
 }

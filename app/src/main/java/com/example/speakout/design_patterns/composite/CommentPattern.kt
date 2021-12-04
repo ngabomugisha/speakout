@@ -5,5 +5,5 @@ import org.w3c.dom.Comment
 
 class CommentPattern(private var comment:Question)
 {
-    private var subComments:ArrayList<Question>?=null
+    private var subComments:ArrayList<CommentPattern>?=null
 }
