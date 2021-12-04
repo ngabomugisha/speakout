@@ -17,4 +17,8 @@
     <string name="save">enregistrer</string>
     <string name="cancel">Annuler</string>
     <string name="vote">voter</string>
+    <string name="andrew_id">Andrew ID</string>
+    <string name="password">Mot de passe</string>
+    <string name="login_btn_txt">connecter</string>
+    <string name="sign_up">Creer un nouveau compte</string>
 </resources>
