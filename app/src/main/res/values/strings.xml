@@ -24,5 +24,6 @@
     <string name="sign_up">Sign up</string>
     <string name="question">Question</string>
     <string name="edit">Edit</string>
-    <string name="full_name">Full Name</string>
+    <string name="post_question">Type your Question Here</string>
+    <string name = "success_msg">Your question is successfully posted</string>
 </resources>

@@ -88,7 +88,7 @@ class PostQuestionFragment : DialogFragment()
                     ,"11-4-2021","$category","$q")
                 saveQuestion.setId(count)
                 provider?.insertQuestion(saveQuestion)
-                Toast.makeText(context,"Your question is successfully posted",Toast.LENGTH_LONG).show()
+                Toast.makeText(context,getString(R.string.success_msg),Toast.LENGTH_LONG).show()
                 question?.setText("")
             }
         }
