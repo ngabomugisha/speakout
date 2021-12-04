@@ -7,10 +7,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.EditText
 import android.widget.Toast
-import com.example.speakout.R
 import com.example.speakout.content_provider.DatabaseConnection
 import com.example.speakout.databinding.ActivityLoginBinding
-import com.example.speakout.databinding.ActivitySignUpBinding
+import com.example.speakout.design_patterns.factory.DashboardFactory
 import com.example.speakout.general.classess.User
 import com.example.speakout.organizer.activities.OrganizerDashboardActivity
 import com.google.firebase.database.DataSnapshot
@@ -73,8 +72,8 @@ class LoginActivity : AppCompatActivity() {
                             putString("ANDREW_ID", user?.getAndrew())
                             putString("ROLE",user?.getRole())
                         }.apply()
-                        Toast.makeText(this@LoginActivity, user?.getAndrew() + "Login Saved for ever", Toast.LENGTH_SHORT)
-                            .show()
+
+                        startActivity(DashboardFactory.decideDashboard(this@LoginActivity,role)?.goToDashboard())
                     }
                     else
                     {

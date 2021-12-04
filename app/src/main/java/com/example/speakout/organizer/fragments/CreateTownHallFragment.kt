@@ -119,7 +119,7 @@ class CreateTownHallFragment : DialogFragment()
         val e:String=end!!.text.toString()
         val det:String=details!!.text.toString()
 
-        if(d.trim().isEmpty() || s.trim().isEmpty() || e.trim().isEmpty())
+        if(d.trim().isEmpty() || s.trim().isEmpty() || e.trim().isEmpty() || det.trim().isEmpty())
         {
             Toast.makeText(context, "Please, all fields are required", Toast.LENGTH_LONG)
             .show()
