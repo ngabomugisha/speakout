@@ -11,21 +11,27 @@ import androidx.fragment.app.DialogFragment
 import com.example.speakout.R
 import com.example.speakout.general.classess.Question
 import com.example.speakout.content_provider.DatabaseConnection
+import com.example.speakout.content_provider.DatabaseProvider
 import com.example.speakout.utils.Helper
 import com.google.android.material.textfield.TextInputEditText
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ValueEventListener
 
 class PostQuestionFragment : DialogFragment()
 {
     private var post_question_id: Button?= null
     private var post_question_close : Button?= null
     private var database: DatabaseReference? = null
+    private var provider: DatabaseProvider? = null
     private var finance:RadioButton?=null
     private var sport:RadioButton?=null
     private var welfare:RadioButton?=null
     private var affair:RadioButton?=null
     private var question: TextInputEditText?=null
     private var category:String?=null;
+    private var count:Int=0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,11 +39,13 @@ class PostQuestionFragment : DialogFragment()
     ): View? {
         // connect to the database
         database = DatabaseConnection.connect()
+        provider= DatabaseConnection.databaseProvider()
         // Inflate the layout for this fragment
         var rootView = inflater.inflate(R.layout.fragment_post_question, container, false)
         initializeButtons(rootView)
         switchCategory()
         closeDialog()
+        updateCount()
         CreatePost()
         return rootView
     }
@@ -46,6 +54,24 @@ class PostQuestionFragment : DialogFragment()
         post_question_close?.setOnClickListener {
             dismiss()
         }
+    }
+
+    private fun updateCount()
+    {
+        database?.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+
+                if(snapshot.exists())
+                {
+                    count= snapshot.child("question").childrenCount.toInt()
+                }
+                count++
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+        });
     }
     private fun CreatePost ()
     {
@@ -58,9 +84,10 @@ class PostQuestionFragment : DialogFragment()
             {
                 val q: String? =question?.text.toString()
                 val date: String =Helper.changeDate(Helper.todayDate())
-                val saveQuestion: Question = Question(1,"$date","001"
+                val saveQuestion: Question = Question("$date","001"
                     ,"11-4-2021","$category","$q")
-                database?.child("question/${saveQuestion.getQuestionId()}")?.setValue(saveQuestion)
+                saveQuestion.setId(count)
+                provider?.insertQuestion(saveQuestion)
                 Toast.makeText(context,"Your question is successfully posted",Toast.LENGTH_LONG).show()
                 question?.setText("")
             }

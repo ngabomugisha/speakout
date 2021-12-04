@@ -40,6 +40,7 @@ class CreateTownHallFragment : DialogFragment()
         // Inflate the layout for this fragment
         var rootView = inflater.inflate(R.layout.fragment_create_town_hall, container, false)
         setInputFields(rootView)
+        updateCount()
         creat_Town_Hall(rootView)
         closeDialog(rootView)
 
@@ -51,6 +52,24 @@ class CreateTownHallFragment : DialogFragment()
         return rootView
     }
 
+    private fun updateCount()
+    {
+        database?.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+
+                if(snapshot.exists())
+                {
+                    count= snapshot.child("townhall").childrenCount.toInt()
+                }
+                count++
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+        })
+    }
+
     private fun setInputFields(rootView: View?)
     {
         date=rootView!!.findViewById<TextInputEditText>(R.id.town_hall_date_id)
@@ -59,10 +78,6 @@ class CreateTownHallFragment : DialogFragment()
         details=rootView!!.findViewById<TextInputEditText>(R.id.town_hall_details_id)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-    }
     fun closeDialog (rootView: View) {
 
         town_hall_close_btn_id = rootView.findViewById(R.id.town_hall_close_btn_id)
@@ -87,6 +102,7 @@ class CreateTownHallFragment : DialogFragment()
                 d=Helper.changeDate(d)
 
                 val townhall: Townhall = Townhall(id,s,e,d,1,"001",det)
+                townhall.setCount(count)
                 // Inserting via a content provider
                 DatabaseConnection.databaseProvider().insertTownHall(townhall)
 
