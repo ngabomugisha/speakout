@@ -21,4 +21,6 @@
     <string name="password">Mot de passe</string>
     <string name="login_btn_txt">connecter</string>
     <string name="sign_up">Creer un nouveau compte</string>
+    <string name="question">Question</string>
+    <string name="edit">Modifier</string>
 </resources>
