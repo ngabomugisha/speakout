@@ -19,9 +19,18 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 //        Getting saved Id during first login
-//        val sp: SharedPreferences =getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
-//        val savedAndrewId:String?=sp.getString("STRING_KEY", null)
-//        Toast.makeText(this,"AndrewId: "+savedAndrewId, Toast.LENGTH_SHORT).show()
+        val sp: SharedPreferences =getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
+        val savedAndrewId:String?=sp.getString("ANDREW_ID", null)
+        val savedRole:String?=sp.getString("ROLE", null)
+        if(savedAndrewId!=null)
+        {
+            Toast.makeText(this,"AndrewId: "+savedAndrewId+", Role: "+savedRole, Toast.LENGTH_SHORT).show()
+        }
+        else
+        {
+            Toast.makeText(this,"No session", Toast.LENGTH_SHORT).show()
+        }
+
 
         val question=binding.question
         question.setOnClickListener {
