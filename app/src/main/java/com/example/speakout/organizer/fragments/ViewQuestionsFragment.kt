@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.speakout.R
 import com.example.speakout.organizer.classes.QuestionClass
 import com.example.speakout.organizer.recycler_views.ReadQuestionAdapter
-import com.example.speakout.utils.DatabaseConnection
+import com.example.speakout.content_provider.DatabaseConnection
 import com.google.firebase.database.DatabaseReference
 
 class ViewQuestionsFragment : Fragment() {
@@ -20,7 +20,7 @@ class ViewQuestionsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // connecting to database
-        database=DatabaseConnection.connect()
+        database= DatabaseConnection.connect()
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_view_questions, container, false)
     }

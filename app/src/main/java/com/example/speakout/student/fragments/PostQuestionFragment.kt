@@ -10,7 +10,7 @@ import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import com.example.speakout.R
 import com.example.speakout.general.classess.Question
-import com.example.speakout.utils.DatabaseConnection
+import com.example.speakout.content_provider.DatabaseConnection
 import com.example.speakout.utils.Helper
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.database.DatabaseReference

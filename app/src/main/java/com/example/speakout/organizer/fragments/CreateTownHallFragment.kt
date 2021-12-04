@@ -9,6 +9,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import com.example.speakout.R
+import com.example.speakout.content_provider.DatabaseConnection
 import com.google.android.material.textfield.TextInputEditText
 
 import com.example.speakout.general.classess.Townhall
@@ -78,29 +79,17 @@ class CreateTownHallFragment : DialogFragment()
             }
             else
             {
-                database?.addValueEventListener(object : ValueEventListener {
-                    override fun onDataChange(snapshot: DataSnapshot) {
+                var d:String=date!!.text.toString()
+                val s:String=Helper.changeDate(start!!.text.toString())
+                val e:String=Helper.changeDate(end!!.text.toString())
+                val det:String=details!!.text.toString()
+                var id=Helper.changeDate(d)
+                d=Helper.changeDate(d)
 
-                        if(snapshot.exists())
-                        {
-                            count= snapshot.child("townhall").childrenCount.toInt()
-                        }
-                        count++
-                        var d:String=date!!.text.toString()
-                        val s:String=Helper.changeDate(start!!.text.toString())
-                        val e:String=Helper.changeDate(end!!.text.toString())
-                        val det:String=details!!.text.toString()
-                        var id=Helper.changeDate(d)
-                        d=Helper.changeDate(d)
+                val townhall: Townhall = Townhall(id,s,e,d,1,"001",det)
+                // Inserting via a content provider
+                DatabaseConnection.databaseProvider().insertTownHall(townhall)
 
-
-                        val townhall: Townhall = Townhall(id,count,s,e,d,1,"001",det)
-                        database?.child("townhall/${townhall.getTownhallId()}")?.setValue(townhall)
-                    }
-                    override fun onCancelled(error: DatabaseError) {
-
-                    }
-                })
                 Toast.makeText(context,"Townhall saved successfully",Toast.LENGTH_LONG).show()
                 dismiss()
             }

@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.speakout.R
 import com.example.speakout.organizer.classes.TownHallViewClass
 import com.example.speakout.organizer.recycler_views.RecyclerViewTownHallAdapter
-import com.example.speakout.utils.DatabaseConnection
+import com.example.speakout.content_provider.DatabaseConnection
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -27,7 +27,7 @@ class ViewTownHallsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        database=DatabaseConnection.connect()
+        database= DatabaseConnection.connect()
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_view_town_halls, container, false)
     }
