@@ -60,38 +60,35 @@ class LoginActivity : AppCompatActivity() {
                     val password:String=snapshot.child("password").value.toString()
                     val role:String=snapshot.child("role").value.toString()
 
-                    var user=User(andrew,password,fname,lname)
-                    user.setRole(role)
-                    Toast.makeText(this@LoginActivity,"${user}",Toast.LENGTH_LONG).show()
+                    // Validate the password
+                    if(password==pass)
+                    {
+                        var user=User(andrew_id,password,fname,lname)
+                        user.setRole(role)
+
+                        val sharedPreferences: SharedPreferences =
+                            getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
+                        val editor: SharedPreferences.Editor = sharedPreferences.edit()
+                        editor.apply {
+                            putString("ANDREW_ID", user?.getAndrew())
+                            putString("ROLE",user?.getRole())
+                        }.apply()
+                        Toast.makeText(this@LoginActivity, user?.getAndrew() + "Login Saved for ever", Toast.LENGTH_SHORT)
+                            .show()
+                    }
+                    else
+                    {
+                        Toast.makeText(this@LoginActivity,"Invalid credentials",Toast.LENGTH_LONG).show()
+                    }
                 }
                 else
                 {
-                    Toast.makeText(this@LoginActivity,"Invalid details",Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@LoginActivity,"Invalid credentials",Toast.LENGTH_LONG).show()
                 }
             }
             override fun onCancelled(error: DatabaseError) {
 
             }
         })
-
-
-//        if(user==null)
-//        {
-//            Toast.makeText(this@LoginActivity,"Invalid details",Toast.LENGTH_LONG).show()
-//        }
-//        else
-//        {
-//            Toast.makeText(this@LoginActivity,"Very True",Toast.LENGTH_LONG).show()
-//            Toast.makeText(this@LoginActivity,"Very True",Toast.LENGTH_LONG).show()
-//            val sharedPreferences: SharedPreferences =
-//                getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
-//            val editor: SharedPreferences.Editor = sharedPreferences.edit()
-//            editor.apply {
-//                putString("ANDREW_ID", user?.getAndrew())
-//                putString("ROLE",user?.getRole())
-//            }.apply()
-//            Toast.makeText(this, user?.getAndrew() + "Login Saved for ever", Toast.LENGTH_SHORT)
-//                .show()
-//        }
     }
 }
