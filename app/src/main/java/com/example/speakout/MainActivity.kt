@@ -31,7 +31,6 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this,"No session", Toast.LENGTH_SHORT).show()
         }
 
-
         val question=binding.question
         question.setOnClickListener {
             questionClicked()
