@@ -25,4 +25,5 @@
     <string name="edit">Modifier</string>
     <string name = "success_msg">Votre question est postée avec succès</string>
     <string name="post_question">Tapez votre question ici</string>
+    <string name="full_name">Full name</string>
 </resources>
