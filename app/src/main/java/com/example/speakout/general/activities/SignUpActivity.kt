@@ -30,8 +30,8 @@ class SignUpActivity : AppCompatActivity() {
 
     private fun signupBtnClicked()
     {
-        val intent: Intent = Intent(this, LoginActivity::class.java)
-        startActivity(intent)
+//        val intent: Intent = Intent(this, LoginActivity::class.java)
+//        startActivity(intent)
     }
 
 }

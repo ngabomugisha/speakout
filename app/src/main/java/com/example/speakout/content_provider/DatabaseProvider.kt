@@ -3,6 +3,7 @@ package com.example.speakout.content_provider
 import android.widget.Toast
 import com.example.speakout.general.classess.Question
 import com.example.speakout.general.classess.Townhall
+import com.example.speakout.general.classess.User
 import com.example.speakout.utils.Helper
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -39,27 +40,28 @@ class DatabaseProvider:Insert,Select, Update
         TODO("Not yet implemented")
     }
 
-    override fun selectUser(andrew: String, password: String)
+    override fun selectUser(andrew: String, password: String): User?
     {
         var user_reference=database.child(" user/$andrew")
-//        var user
+        var user:User?=null
         database?.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if(snapshot.exists())
                 {
-
+                    val andrew:String = snapshot.child("andrew").value.toString()
+                    val fname:String=snapshot.child(" firstname").value.toString()
+                    val lname:String=snapshot.child("lastname").value.toString()
+                    val password:String=snapshot.child(" password").value.toString()
+                    val role:String=snapshot.child(" role").value.toString()
+                    user=User(andrew,fname,lname,password)
                 }
-                else
-                {
-
-                }
-
             }
 
             override fun onCancelled(error: DatabaseError) {
 
             }
-        });
+        })
+        return user
     }
 
 }

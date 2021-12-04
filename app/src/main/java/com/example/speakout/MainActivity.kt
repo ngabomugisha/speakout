@@ -19,9 +19,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 //        Getting saved Id during first login
-        val sp: SharedPreferences =getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
-        val savedAndrewId:String?=sp.getString("STRING_KEY", null)
-        Toast.makeText(this,"AndrewId: "+savedAndrewId, Toast.LENGTH_SHORT).show()
+//        val sp: SharedPreferences =getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
+//        val savedAndrewId:String?=sp.getString("STRING_KEY", null)
+//        Toast.makeText(this,"AndrewId: "+savedAndrewId, Toast.LENGTH_SHORT).show()
 
         val question=binding.question
         question.setOnClickListener {
@@ -43,6 +43,7 @@ class MainActivity : AppCompatActivity() {
     {
         val intent:Intent= Intent(this,LoginActivity::class.java)
         startActivity(intent)
+        Toast.makeText(this,"JHereree", Toast.LENGTH_LONG).show()
     }
 
     private fun postClicked()

@@ -8,36 +8,34 @@ import android.os.Bundle
 import android.widget.EditText
 import android.widget.Toast
 import com.example.speakout.R
+import com.example.speakout.content_provider.DatabaseConnection
 import com.example.speakout.databinding.ActivityLoginBinding
 import com.example.speakout.databinding.ActivitySignUpBinding
+import com.example.speakout.general.classess.User
 import com.example.speakout.organizer.activities.OrganizerDashboardActivity
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var andrew_id_login_id: EditText
+    private lateinit var password: EditText
     private lateinit var binding: ActivityLoginBinding
-    private lateinit var bindingSignUpBinding: ActivitySignUpBinding
+//    private lateinit var bindingSignUpBinding: ActivitySignUpBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding= ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        bindingSignUpBinding= ActivitySignUpBinding.inflate(layoutInflater)
-        setContentView(bindingSignUpBinding.root)
-
-        andrew_id_login_id=findViewById(R.id.andrew_id_login_id)
+        andrew_id_login_id=binding.andrewIdLoginId
+        password=binding.passwordLoginId
 
         val login=binding.loginBtnId
         login.setOnClickListener {
-            loginBtnClicked()
+//            loginBtnClicked()
             saveSession()//save andrew id on the first login
         }
 
-        val signup=bindingSignUpBinding.signupSignupBtnId
-        signup.setOnClickListener {
-//            loginBtnClicked()
-//            saveSession()//save andrew id on the first login
-            Toast.makeText(this,"Let's log in...", Toast.LENGTH_SHORT).show()
-        }
     }
 
     private fun loginBtnClicked()
@@ -46,13 +44,52 @@ class LoginActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    private fun saveSession() {
-        val insertedAndrewId:String = andrew_id_login_id.text.toString()//save login
-        val sharedPreferences: SharedPreferences = getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
-        val editor: SharedPreferences.Editor = sharedPreferences.edit()
-        editor.apply {
-            putString("STRING_KEY", insertedAndrewId)
-        }.apply()
-        Toast.makeText(this,insertedAndrewId+"Login Saved for ever", Toast.LENGTH_SHORT).show()
+    private fun saveSession()
+    {
+        var database=DatabaseConnection.connect()
+        var user:User?=null
+        var user_reference=database.child(" user}")
+        user_reference?.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if(snapshot.exists())
+                {
+//                    val andrew:String = snapshot.child("andrew").value.toString()
+//                    val fname:String=snapshot.child(" firstname").value.toString()
+//                    val lname:String=snapshot.child("lastname").value.toString()
+//                    val password:String=snapshot.child(" password").value.toString()
+//                    val role:String=snapshot.child(" role").value.toString()
+//                    user=User(andrew,fname,lname,password)
+                    Toast.makeText(this@LoginActivity,"seen",Toast.LENGTH_LONG).show()
+                }
+                else
+                {
+                    Toast.makeText(this@LoginActivity,"$user_reference",Toast.LENGTH_LONG).show()
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+        })
+
+//        val andrew=andrew_id_login_id.text.toString()
+//        val pass=password.text.toString()
+//        if(user==null)
+//        {
+//            Toast.makeText(this@LoginActivity,"Invalid details",Toast.LENGTH_LONG).show()
+//        }
+//        else
+//        {
+//            Toast.makeText(this@LoginActivity,"Very True",Toast.LENGTH_LONG).show()
+//            val sharedPreferences: SharedPreferences =
+//                getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
+//            val editor: SharedPreferences.Editor = sharedPreferences.edit()
+//            editor.apply {
+//                putString("ANDREW_ID", user?.getAndrew())
+//                putString("ROLE",user?.getRole())
+//            }.apply()
+//            Toast.makeText(this, user?.getAndrew() + "Login Saved for ever", Toast.LENGTH_SHORT)
+//                .show()
+//        }
     }
 }
