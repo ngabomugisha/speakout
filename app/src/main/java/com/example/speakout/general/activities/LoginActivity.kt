@@ -46,40 +46,42 @@ class LoginActivity : AppCompatActivity() {
 
     private fun saveSession()
     {
+        val andrew=andrew_id_login_id.text.toString()
+        val pass=password.text.toString()
         var database=DatabaseConnection.connect()
-        var user:User?=null
-        var user_reference=database.child(" user}")
+        val user_reference=database.child("user/$andrew")
         user_reference?.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if(snapshot.exists())
                 {
-//                    val andrew:String = snapshot.child("andrew").value.toString()
-//                    val fname:String=snapshot.child(" firstname").value.toString()
-//                    val lname:String=snapshot.child("lastname").value.toString()
-//                    val password:String=snapshot.child(" password").value.toString()
-//                    val role:String=snapshot.child(" role").value.toString()
-//                    user=User(andrew,fname,lname,password)
-                    Toast.makeText(this@LoginActivity,"seen",Toast.LENGTH_LONG).show()
+                    val andrew_id:String = snapshot.child("andrew_id").value.toString()
+                    val fname:String= snapshot.child("firstname").value.toString()
+                    val lname:String= snapshot.child("lastname").value.toString()
+                    val password:String=snapshot.child("password").value.toString()
+                    val role:String=snapshot.child("role").value.toString()
+
+                    var user=User(andrew,password,fname,lname)
+                    user.setRole(role)
+                    Toast.makeText(this@LoginActivity,"${user}",Toast.LENGTH_LONG).show()
                 }
                 else
                 {
-                    Toast.makeText(this@LoginActivity,"$user_reference",Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@LoginActivity,"Invalid details",Toast.LENGTH_LONG).show()
                 }
             }
-
             override fun onCancelled(error: DatabaseError) {
 
             }
         })
 
-//        val andrew=andrew_id_login_id.text.toString()
-//        val pass=password.text.toString()
+
 //        if(user==null)
 //        {
 //            Toast.makeText(this@LoginActivity,"Invalid details",Toast.LENGTH_LONG).show()
 //        }
 //        else
 //        {
+//            Toast.makeText(this@LoginActivity,"Very True",Toast.LENGTH_LONG).show()
 //            Toast.makeText(this@LoginActivity,"Very True",Toast.LENGTH_LONG).show()
 //            val sharedPreferences: SharedPreferences =
 //                getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)

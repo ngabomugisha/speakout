@@ -42,9 +42,9 @@ class DatabaseProvider:Insert,Select, Update
 
     override fun selectUser(andrew: String, password: String): User?
     {
-        var user_reference=database.child(" user/$andrew")
+        var user_reference=database.child("user/$andrew")
         var user:User?=null
-        database?.addValueEventListener(object : ValueEventListener {
+        user_reference?.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if(snapshot.exists())
                 {
