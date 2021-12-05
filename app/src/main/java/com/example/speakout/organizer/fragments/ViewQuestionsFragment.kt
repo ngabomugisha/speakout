@@ -31,22 +31,21 @@ class ViewQuestionsFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_view_questions, container, false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?)
+    {
         super.onViewCreated(view, savedInstanceState)
-
         recycler= activity?.findViewById<RecyclerView>(R.id.organizer_questions_recy_vw_id)
        getQuestions()
     }
 
     private fun getQuestions()
     {
-        var question_reference=database?.child("question")
-        var poster_reference=database?.child("user")
-        question_reference?.addValueEventListener(object : ValueEventListener {
+        database?.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if(snapshot.exists())
                 {
-                    var questions=snapshot.children
+                    var questions=snapshot.child("question").children
+                    var users=snapshot.child("user")
                     var i=0
                     val all_questions:ArrayList<QuestionClass> = ArrayList();
                     questions.forEach{
@@ -56,8 +55,9 @@ class ViewQuestionsFragment : Fragment() {
                             val content=it.child("content").value.toString()
                             val date=it.child("date").value.toString()
                             val poster=it.child("posterId").value.toString()
+                            var poster_name=users.child("$poster").child("firstname").value.toString()
                             val num_count=2
-                            all_questions.add(QuestionClass("$content","$poster","$date","$num_count"))
+                            all_questions.add(QuestionClass("$content","$poster_name","$date","$num_count"))
                         }
                         i++
                     }

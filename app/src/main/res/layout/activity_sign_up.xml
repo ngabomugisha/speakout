@@ -75,7 +75,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/full_name"
+                android:text="@string/firstname"
                 android:textSize="20sp" />
 
             <com.google.android.material.textfield.TextInputLayout
@@ -83,10 +83,35 @@
                 android:layout_height="60sp"
                 android:layout_marginLeft="20sp"
                 android:layout_marginTop="10sp"
-                android:hint="Full Name">
+                android:hint="First Name">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/full_name_signup"
+                    android:id="@+id/first_name_signup"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/last_name"
+                android:textSize="20sp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="60sp"
+                android:layout_marginLeft="20sp"
+                android:layout_marginTop="10sp"
+                android:hint="Last Name">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/last_name_signup"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -103,7 +128,7 @@
                 android:id="@+id/signup_signup_btn_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/login_btn_txt"
+                android:text="@string/sign_up"
                 android:textSize="20sp" />
             />
         </LinearLayout>

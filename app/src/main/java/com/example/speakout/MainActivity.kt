@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.widget.Toast
 import com.example.speakout.databinding.ActivityMainBinding
 import com.example.speakout.general.activities.LoginActivity
+import com.example.speakout.general.activities.SignUpActivity
 import com.example.speakout.general.fragments.OrganizerOneTownHallActivity
 import com.example.speakout.student.activities.ViewQuestionsStudentActivity
 
@@ -24,7 +25,7 @@ class MainActivity : AppCompatActivity() {
         val savedRole:String?=sp.getString("ROLE", null)
         if(savedAndrewId!=null)
         {
-            Toast.makeText(this,"AndrewId: "+savedAndrewId+", Role: "+savedRole, Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "AndrewId: $savedAndrewId, Role: $savedRole", Toast.LENGTH_SHORT).show()
         }
         else
         {
@@ -49,9 +50,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun loginClicked()
     {
-        val intent:Intent= Intent(this,LoginActivity::class.java)
+        val intent:Intent= Intent(this,SignUpActivity::class.java)
         startActivity(intent)
-        Toast.makeText(this,"JHereree", Toast.LENGTH_LONG).show()
     }
 
     private fun postClicked()
