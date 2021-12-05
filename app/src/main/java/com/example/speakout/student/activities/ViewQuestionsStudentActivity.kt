@@ -2,6 +2,7 @@ package com.example.speakout.student.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -27,7 +28,7 @@ class ViewQuestionsStudentActivity : AppCompatActivity() {
 
         townhall_id= intent.getStringExtra("townhall_id").toString()
         startFragments()
-
+        Log.d("@@@@@@@@", " >>>ViewQuestionStudentActivity<<<<< This is the activity we started1");
         postClicked()
 
     }
