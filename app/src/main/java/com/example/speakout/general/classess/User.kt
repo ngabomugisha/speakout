@@ -7,7 +7,7 @@ class User(private var andrew:String, private var password:String,private var fi
     init
     {
       status=1
-      role=" student"
+      role="organizer"
     }
 
     fun getAndrew()=andrew

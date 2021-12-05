@@ -56,7 +56,8 @@ class MainActivity : AppCompatActivity() {
         val savedRole: String? =sp.getString("ROLE", null)
         if(savedAndrewId!=null)
         {
-            startActivity(DashboardFactory.decideDashboard(this,"$savedRole")?.goToDashboard())
+            Toast.makeText(this,"$savedRole", Toast.LENGTH_SHORT).show()
+//            startActivity(DashboardFactory.decideDashboard(this,"$savedRole")?.goToDashboard())
         }
         else
         {

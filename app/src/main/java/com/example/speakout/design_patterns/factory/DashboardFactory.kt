@@ -3,6 +3,7 @@ package com.example.speakout.design_patterns.factory
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import com.example.speakout.design_patterns.strategy.DecideDashboard
+import com.example.speakout.design_patterns.strategy.GoToOrganizer
 import com.example.speakout.design_patterns.strategy.GoToStudent
 import com.google.firebase.database.ValueEventListener
 
@@ -19,7 +20,7 @@ class DashboardFactory
             }
             if(role=="organizer")
             {
-                dashboard=GoToStudent(context)
+                dashboard=GoToOrganizer(context)
             }
             return dashboard
         }

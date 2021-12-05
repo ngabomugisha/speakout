@@ -57,9 +57,7 @@ class SignUpActivity : AppCompatActivity() {
         val pass=password_signup.text.toString()
         val fname=firstname.text.toString()
         val lname=lastname.text.toString()
-        val role="student"
         var user:User=User("$userId","$pass","$fname","$lname")
-        user.setRole(role)
         database?.child("user/$userId")?.setValue(user)
         val intent:Intent= Intent(this,LoginActivity::class.java)
         startActivity(intent)
