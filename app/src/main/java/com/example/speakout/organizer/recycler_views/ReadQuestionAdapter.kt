@@ -24,7 +24,7 @@ import androidx.fragment.app.FragmentActivity
 import com.example.speakout.student.fragments.PostQuestionFragment
 
 class ReadQuestionAdapter(private var questions: ArrayList<QuestionClass>
-,private var listener:QuestionClickInterface) :
+,private var listener:QuestionClickInterface,private var longListener:QuestionOnLongClick) :
 
     RecyclerView.Adapter<ReadQuestionAdapter.ReadQuestionHolder>() {
 
@@ -37,10 +37,13 @@ class ReadQuestionAdapter(private var questions: ArrayList<QuestionClass>
     }
 
     override fun onBindViewHolder(holder: ReadQuestionHolder,position: Int) {
-        holder.bind(questions[position])
+        if(questions[position].getDate().isNotEmpty())
+        {
+            holder.bind(questions[position])
+        }
     }
 
-    inner class ReadQuestionHolder (itemView: View): RecyclerView.ViewHolder(itemView), View.OnClickListener {
+    inner class ReadQuestionHolder (itemView: View): RecyclerView.ViewHolder(itemView), View.OnClickListener, View.OnLongClickListener {
 
         private lateinit var quest: TextView;
         private lateinit var poster: TextView;
@@ -75,6 +78,15 @@ class ReadQuestionAdapter(private var questions: ArrayList<QuestionClass>
                 listener.questionOnClick(position)
             }
         }
+
+        override fun onLongClick(v: View?): Boolean {
+            val position=adapterPosition
+            if (position != RecyclerView.NO_POSITION)
+            {
+                longListener.questionOnLongClick(position)
+            }
+            return true
+        }
     }
     fun upvoteQuestion(index: Int) {
 
@@ -83,5 +95,9 @@ class ReadQuestionAdapter(private var questions: ArrayList<QuestionClass>
     interface  QuestionClickInterface
     {
         fun questionOnClick(position: Int)
+    }
+    interface QuestionOnLongClick
+    {
+        fun questionOnLongClick(position: Int)
     }
 }

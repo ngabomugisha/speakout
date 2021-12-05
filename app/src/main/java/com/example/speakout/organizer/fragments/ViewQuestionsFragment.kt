@@ -1,10 +1,8 @@
 package com.example.speakout.organizer.fragments
 
 import android.content.Context
-import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -18,22 +16,16 @@ import com.example.speakout.R
 import com.example.speakout.organizer.classes.QuestionClass
 import com.example.speakout.organizer.recycler_views.ReadQuestionAdapter
 import com.example.speakout.content_provider.DatabaseConnection
-<<<<<<< Updated upstream
-import com.example.speakout.design_patterns.factory.DashboardFactory
-import com.example.speakout.organizer.recycler_views.SwipeToUpvoteCallback
-import com.example.speakout.student.activities.StudentDashboard
-import com.example.speakout.student.fragments.PostQuestionFragment
-=======
+
 import com.example.speakout.organizer.classes.MaxHeap
-import com.example.speakout.organizer.recycler_views.SwipeToUpvoteCallback
 import com.example.speakout.utils.Helper
->>>>>>> Stashed changes
+
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
 
-class ViewQuestionsFragment : Fragment(), ReadQuestionAdapter.QuestionClickInterface {
+class ViewQuestionsFragment : Fragment(), ReadQuestionAdapter.QuestionClickInterface, ReadQuestionAdapter.QuestionOnLongClick {
     private var recycler: RecyclerView?=null;
     private var database:DatabaseReference?=null;
     private var townhall_id:String=""
@@ -76,7 +68,7 @@ class ViewQuestionsFragment : Fragment(), ReadQuestionAdapter.QuestionClickInter
                     var users=snapshot.child("user")
                     var i=0
                     all_questions.clear()
-                    var heap: MaxHeap=MaxHeap();
+                    var heap: MaxHeap =MaxHeap();
                     questions.forEach{
                         if(i!=0)
                         {
@@ -96,20 +88,45 @@ class ViewQuestionsFragment : Fragment(), ReadQuestionAdapter.QuestionClickInter
                         }
                         i++
                     }
-                    var adapter=ReadQuestionAdapter(all_questions,this@ViewQuestionsFragment)
+                    var adapter=ReadQuestionAdapter(all_questions,this@ViewQuestionsFragment,this@ViewQuestionsFragment)
                    if(savedRole=="organizer")
                     {
-                        adapter = ReadQuestionAdapter(heap.get(Helper.toInteger(number)), this@ViewQuestionsFragment)
+                        adapter = ReadQuestionAdapter(heap.get(Helper.toInteger(number)), this@ViewQuestionsFragment,this@ViewQuestionsFragment)
                         recycler?.adapter=adapter
                         adapter.notifyDataSetChanged()
                    }
                     if(savedRole=="student")
                     {
-                        adapter = ReadQuestionAdapter(heap.get(Helper.toInteger(number)), this@ViewQuestionsFragment)
+                        adapter = ReadQuestionAdapter(all_questions, this@ViewQuestionsFragment,this@ViewQuestionsFragment)
                         recycler?.adapter=adapter
                         adapter.notifyDataSetChanged()
                     }
 
+//                    val swipeUpvote = object : SwipeToUpvoteCallback(requireContext()){
+//                        override fun onSwiped(
+//                            viewHolder: RecyclerView.ViewHolder,
+//                            direction: Int
+//                        ) {
+//                            adapter.upvoteQuestion(viewHolder.adapterPosition)
+//                            // Using a content provider, vote
+//                            val sp: SharedPreferences? =activity?.getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
+//                            val savedAndrewId:String?=sp?.getString("ANDREW_ID", null)
+//                            val savedRole:String?=sp?.getString("ROLE", null)
+//                            if(savedRole=="student")
+//                            {
+//                                DatabaseConnection.databaseProvider().voteQuestion(
+//                                    "$savedAndrewId",
+//                                    "${all_questions.get(viewHolder.adapterPosition).getId()}",
+//                                    1
+//                                )
+//                                Toast.makeText(context, "Voted", Toast.LENGTH_LONG).show()
+//                            }
+//                            else
+//                            {
+//                                Toast.makeText(context, "You are an organizer", Toast.LENGTH_LONG).show()
+//                            }
+//                        }
+//                    }
 
 
                     val swipeUpvote = object : SwipeToUpvoteCallback(){
@@ -169,14 +186,22 @@ class ViewQuestionsFragment : Fragment(), ReadQuestionAdapter.QuestionClickInter
     //organizer_questions_recy_vw_id organizer_questions_recy_vw_id
     override fun questionOnClick(position: Int)
     {
-//        var intent= Intent(activity, StudentDashboard::class.java)
-//        startActivity(intent)
-        var fragment = Fragment_comment()
-        var bundle:Bundle= Bundle()
-        bundle.putString("townhall_id",townhall_id)
-        fragment.arguments=bundle
-        fragment.show(requireActivity().supportFragmentManager, "DialogFragment")
+        DatabaseConnection.databaseProvider().voteQuestion(
+            "$savedAndrewId",
+            all_questions[position].getId(),
+            1
+        )
+        Toast.makeText(context, "Voted", Toast.LENGTH_LONG).show()
+    }
 
+    override fun questionOnLongClick(position: Int)
+    {
+//        DatabaseConnection.databaseProvider().voteQuestion(
+//            "$savedAndrewId",
+//            all_questions[position].getId(),
+//            1
+//        )
+//        Toast.makeText(context, "Voted", Toast.LENGTH_LONG).show()
     }
 
 }

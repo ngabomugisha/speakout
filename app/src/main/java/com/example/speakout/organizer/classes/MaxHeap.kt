@@ -86,9 +86,18 @@ class MaxHeap
     fun get(i:Int):ArrayList<QuestionClass> // return a list
     {
         var out:ArrayList<QuestionClass> = ArrayList()
+        val s=length
         for(i in 1..i)
         {
-            out.add(removeMax())
+            val t=removeMax()
+            if(t.getId()!="NotFound")
+            {
+                out.add(removeMax())
+            }
+            if(i==s-1)
+            {
+                break
+            }
         }
         return out
     }
