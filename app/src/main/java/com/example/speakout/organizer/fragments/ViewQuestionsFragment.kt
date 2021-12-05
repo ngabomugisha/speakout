@@ -82,7 +82,23 @@ class ViewQuestionsFragment : Fragment(), ReadQuestionAdapter.QuestionClickInter
                             direction: Int
                         ) {
                             adapter.upvoteQuestion(viewHolder.adapterPosition)
-                            Toast.makeText(context,"${all_questions[viewHolder.adapterPosition].getId()}",Toast.LENGTH_LONG).show()
+                            // Using a content provider, vote
+                            val sp: SharedPreferences? =activity?.getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
+                            val savedAndrewId:String?=sp?.getString("ANDREW_ID", null)
+                            val savedRole:String?=sp?.getString("ROLE", null)
+                            if(savedRole=="student")
+                            {
+                                DatabaseConnection.databaseProvider().voteQuestion(
+                                    "$savedAndrewId",
+                                    "${all_questions.get(viewHolder.adapterPosition).getId()}",
+                                    1
+                                )
+                                Toast.makeText(context, "Voted", Toast.LENGTH_LONG).show()
+                            }
+                            else
+                            {
+                                Toast.makeText(context, "You are an organizer", Toast.LENGTH_LONG).show()
+                            }
                         }
                     }
 

@@ -27,9 +27,9 @@ class DatabaseProvider:Insert,Select, Update
         database?.child("question/${question.getQuestionId()}")?.setValue(question)
     }
 
-    override fun voteQuestion(voter: String, question: Int, vote: Int)
+    override fun voteQuestion(voter: String, question: String, vote: Int)
     {
-        database?.child("question/$question/votes/$voter/$vote")
+        database?.child("question/$question/votes/$voter").setValue("$vote")
     }
 
     override fun selectTownHalls()
