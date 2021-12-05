@@ -29,7 +29,7 @@ class ViewQuestionsFragment : Fragment() {
         // connecting to database
         database= DatabaseConnection.connect()
         townhall_id= this.arguments?.getString("townhall_id").toString()
-        
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_view_questions, container, false)
     }

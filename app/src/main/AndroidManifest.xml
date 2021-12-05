@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SpeakOut">
         <activity
+            android:name=".student.activities.StudentDashboard"
+            android:exported="true" />
+        <activity
             android:name=".general.activities.LoginActivity"
             android:exported="false" />
         <activity

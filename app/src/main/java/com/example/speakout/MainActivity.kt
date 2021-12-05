@@ -56,7 +56,7 @@ class MainActivity : AppCompatActivity() {
         val savedRole: String? =sp.getString("ROLE", null)
         if(savedAndrewId!=null)
         {
-            startActivity(DashboardFactory.decideDashboard(this,"organizer")?.goToDashboard())
+            startActivity(DashboardFactory.decideDashboard(this,"$savedRole")?.goToDashboard())
         }
         else
         {
