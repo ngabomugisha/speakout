@@ -12,6 +12,7 @@ import com.example.speakout.R
 import com.example.speakout.organizer.classes.TownHallViewClass
 import com.example.speakout.organizer.recycler_views.RecyclerViewTownHallAdapter
 import com.example.speakout.content_provider.DatabaseConnection
+import com.example.speakout.organizer.classes.MaxHeap
 import com.example.speakout.organizer.fragments.ViewQuestionsFragment
 import com.example.speakout.student.activities.ViewQuestionsStudentActivity
 import com.google.firebase.database.DataSnapshot

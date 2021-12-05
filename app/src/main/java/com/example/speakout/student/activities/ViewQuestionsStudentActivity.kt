@@ -54,7 +54,37 @@ class ViewQuestionsStudentActivity : AppCompatActivity() {
         differentiateUsers()
         startFragments()
         postClicked()
+        viewClicked()
 
+    }
+
+    private fun viewClicked()
+    {
+        binding.searchQuestionsBtnId.setOnClickListener {
+            val n=binding.searchQuestionsId.text.toString()
+            if(n.isNotEmpty())
+            {8
+                show(fragment_layout)
+                var bundle: Bundle = Bundle()
+                bundle.putString("townhall_id", townhall_id)
+                bundle.putString("number", n)
+                val fragment: Fragment = ViewQuestionsFragment()
+                fragment.arguments = bundle
+                val manager: FragmentManager = supportFragmentManager
+                val transaction: FragmentTransaction = manager.beginTransaction()
+                transaction.setReorderingAllowed(true)
+                transaction.add(
+                    com.example.speakout.R.id.view_towhalls_questions_student_fragment_id,
+                    fragment,
+                    null
+                )
+                transaction.commit()
+            }
+            else
+            {
+                Toast.makeText(this,"Please, enter a number",Toast.LENGTH_LONG).show()
+            }
+        }
     }
 
     private fun hide(v: View?)
@@ -82,6 +112,7 @@ class ViewQuestionsStudentActivity : AppCompatActivity() {
     {
         var bundle:Bundle= Bundle()
         bundle.putString("townhall_id",townhall_id)
+        bundle.putString("number","0")
         val fragment:Fragment=ViewQuestionsFragment()
         fragment.arguments=bundle
         val manager: FragmentManager = supportFragmentManager
@@ -101,7 +132,7 @@ class ViewQuestionsStudentActivity : AppCompatActivity() {
         {
             show(view_questions)
             hide(post_layout)
-//            hide(fragment_layout)
+            hide(fragment_layout)
         }
         if(savedRole=="student")
         {

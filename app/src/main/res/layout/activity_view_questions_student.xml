@@ -39,6 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20sp"
             android:hint="number"
+            android:inputType="number"
             android:text="" />
 
         <Button
