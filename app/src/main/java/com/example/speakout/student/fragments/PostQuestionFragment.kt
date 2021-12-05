@@ -87,8 +87,9 @@ class PostQuestionFragment : DialogFragment()
                 val saveQuestion: Question = Question("$date","001"
                     ,"11-4-2021","$category","$q")
                 saveQuestion.setId(count)
+                saveQuestion.setParent(saveQuestion.getQuestionId())
                 provider?.insertQuestion(saveQuestion)
-                Toast.makeText(context,"Your question is successfully posted",Toast.LENGTH_LONG).show()
+                Toast.makeText(context,getString(R.string.success_msg),Toast.LENGTH_LONG).show()
                 question?.setText("")
             }
         }

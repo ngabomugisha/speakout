@@ -1,50 +1,87 @@
 package com.example.speakout.organizer.recycler_views
 
+import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.RecyclerView
-import com.example.speakout.R
+import com.example.speakout.general.fragments.ViewTownHallsFragment
 import com.example.speakout.organizer.classes.QuestionClass
 
-class ReadQuestionAdapter(private var questions: ArrayList<QuestionClass>) :
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import com.example.speakout.organizer.fragments.Fragment_comment
+import android.R
+
+import androidx.core.content.ContentProviderCompat.requireContext
+
+import androidx.fragment.app.FragmentActivity
+import com.example.speakout.student.fragments.PostQuestionFragment
+
+class ReadQuestionAdapter(private var questions: ArrayList<QuestionClass>
+,private var listener:QuestionClickInterface) :
+
     RecyclerView.Adapter<ReadQuestionAdapter.ReadQuestionHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReadQuestionHolder {
-        val view: View= LayoutInflater.from(parent.context).inflate(R.layout.organizer_questions_vw_card, parent,false);
+        val view: View= LayoutInflater.from(parent.context).inflate(com.example.speakout.R.layout.organizer_questions_vw_card, parent,false);
         return ReadQuestionHolder(view);
     }
     override fun getItemCount(): Int {
         return this.questions.size;
     }
 
-    override fun onBindViewHolder(
-        holder: ReadQuestionHolder,
-        position: Int
-    ) {
+    override fun onBindViewHolder(holder: ReadQuestionHolder,position: Int) {
         holder.bind(questions[position])
     }
 
-    class ReadQuestionHolder (itemView: View): RecyclerView.ViewHolder(itemView)
-    {
+    inner class ReadQuestionHolder (itemView: View): RecyclerView.ViewHolder(itemView), View.OnClickListener {
+
         private lateinit var quest: TextView;
         private lateinit var poster: TextView;
         private lateinit var num: TextView
         private lateinit var date: TextView
-        fun bind(question : QuestionClass)
-        {
-            quest=itemView.findViewById<TextView>(R.id.asked_question_id)
-            poster=itemView.findViewById<TextView>(R.id.question_asker_org_id)
-            num=itemView.findViewById<TextView>(R.id.comm_num_id)
-            date=itemView.findViewById<TextView>(R.id.date_asked)
+        private lateinit var comment: TextView
+        private lateinit var votes:TextView
 
-            quest.text=question.getQuestion();
-            poster.text=question.getPoster()
-            num.text=question.getNumberOfComments()
-            date.text=question.getDate()
+        init {
+            itemView.setOnClickListener(this)
+        }
+        fun bind(question: QuestionClass) {
+            quest = itemView.findViewById<TextView>(com.example.speakout.R.id.asked_question_id)
+            poster =
+                itemView.findViewById<TextView>(com.example.speakout.R.id.question_asker_org_id)
+            num = itemView.findViewById<TextView>(com.example.speakout.R.id.comm_num_id)
+            date = itemView.findViewById<TextView>(com.example.speakout.R.id.date_asked)
+            votes=itemView.findViewById<TextView>(com.example.speakout.R.id.votes_num)
+
+            comment = itemView.findViewById<TextView>(com.example.speakout.R.id.btn_comment)
+            quest.text = question.getQuestion();
+            poster.text = question.getPoster()
+            num.text = question.getNumberOfComments()
+            date.text = question.getDate()
+            votes.text=question.getVotes()
+        }
+
+        override fun onClick(v: View?) {
+            val position=adapterPosition
+            if (position != RecyclerView.NO_POSITION)
+            {
+                listener.questionOnClick(position)
+            }
         }
     }
+    fun upvoteQuestion(index: Int) {
 
+    }
 
+    interface  QuestionClickInterface
+    {
+        fun questionOnClick(position: Int)
+    }
 }

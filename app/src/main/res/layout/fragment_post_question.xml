@@ -70,7 +70,7 @@
                     android:layout_width="match_parent"
                     android:layout_margin="10sp"
                     android:layout_height="match_parent"
-                    android:hint="Type your Question Here">
+                    android:hint="@string/post_question">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/question_content_id"

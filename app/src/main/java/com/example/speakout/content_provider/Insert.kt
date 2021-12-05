@@ -7,4 +7,5 @@ interface Insert
 {
     fun insertTownHall(townhall:Townhall)
     fun insertQuestion(question:Question)
+    fun voteQuestion(voter:String, question:String,vote:Int)
 }
