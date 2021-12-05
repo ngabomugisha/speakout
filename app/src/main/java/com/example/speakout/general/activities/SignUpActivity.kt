@@ -46,9 +46,17 @@ class SignUpActivity : AppCompatActivity() {
             {
                 signupBtnClicked()
             }
-
+        }
+        val login=binding.loginSignupBtnId
+        login.setOnClickListener {
+            loginClicked()
         }
 
+    }
+
+    private fun loginClicked() {
+        val intent:Intent= Intent(this,LoginActivity::class.java)
+        startActivity(intent)
     }
 
     private fun signupBtnClicked()

@@ -25,8 +25,8 @@
     <string name="question">Question</string>
     <string name="edit">Edit</string>
     <string name="post_question">Type your Question Here</string>
-    <string name="full_name">Full name</string>
     <string name="success_msg">Your question is successfully posted</string>
-    <string name="firstname">FirstName</string>
+    <string name="firstname">First Name</string>
     <string name="last_name">Last Name</string>
+    <string name="have_account">I have an account</string>
 </resources>

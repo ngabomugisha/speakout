@@ -11,6 +11,7 @@ import com.example.speakout.design_patterns.factory.DashboardFactory
 import com.example.speakout.general.activities.SignUpActivity
 import com.example.speakout.general.fragments.OrganizerOneTownHallActivity
 import com.example.speakout.student.activities.ViewQuestionsStudentActivity
+import com.google.android.material.internal.ContextUtils.getActivity
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -28,6 +29,11 @@ class MainActivity : AppCompatActivity() {
         super.onResume()
         checkPreferences()
     }
+
+//    override fun onStop() {
+//        super.onStop()
+//        System.exit(0);
+//    }
     private fun checkPreferences()
     {
         val sp: SharedPreferences =getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
