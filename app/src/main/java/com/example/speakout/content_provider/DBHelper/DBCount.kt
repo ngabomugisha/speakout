@@ -6,6 +6,15 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
 
+/**
+ * DBCount.kt is made to count posts
+ *
+ * @author GeekPrideSoft (Maurice, Robert, Jean Paul, Venant)
+ *
+ * On my honor, as a Carnegie-Mellon Africa student, I have neither given nor received unauthorized
+ * assistance on this work.
+ *
+ */
 class DBCount
 {
     companion object

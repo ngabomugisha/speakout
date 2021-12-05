@@ -12,6 +12,15 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
 
+/**
+ * DatabaseProvider.kt is enabling manipulating data from database.
+ *
+ * @author GeekPrideSoft (Maurice, Robert, Jean Paul, Venant)
+ *
+ * On my honor, as a Carnegie-Mellon Africa student, I have neither given nor received unauthorized
+ * assistance on this work.
+ *
+ */
 class DatabaseProvider:Insert,Select, Update
 {
     private var database:DatabaseReference= DatabaseConnection.connect()

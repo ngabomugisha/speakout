@@ -21,6 +21,15 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
 
+/**
+ * PostQuestionFragment.kt is a fragment for posting question
+ *
+ * @author GeekPrideSoft (Maurice, Robert, Jean Paul, Venant)
+ *
+ * On my honor, as a Carnegie-Mellon Africa student, I have neither given nor received unauthorized
+ * assistance on this work.
+ *
+ */
 class PostQuestionFragment : DialogFragment()
 {
     private var post_question_id: Button?= null

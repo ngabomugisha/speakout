@@ -6,6 +6,15 @@ import android.os.Handler
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 
+/**
+ * SplashScreen.kt create a splash screen before app start other functionalities
+ *
+ * @author GeekPrideSoft (Maurice, Robert, Jean Paul, Venant)
+ *
+ * On my honor, as a Carnegie-Mellon Africa student, I have neither given nor received unauthorized
+ * assistance on this work.
+ *
+ */
 @Suppress("DEPRECATION")
 class SplashScreen : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

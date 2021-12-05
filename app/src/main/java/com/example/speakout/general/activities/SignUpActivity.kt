@@ -18,7 +18,15 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
-
+/**
+ * SignupActivity.kt is enabling new users to sign up
+ *
+ * @author GeekPrideSoft (Maurice, Robert, Jean Paul, Venant)
+ *
+ * On my honor, as a Carnegie-Mellon Africa student, I have neither given nor received unauthorized
+ * assistance on this work.
+ *
+ */
 class SignUpActivity : AppCompatActivity() {
     private lateinit var andrew_id_signup: TextInputEditText
     private lateinit var password_signup: TextInputEditText

@@ -2,6 +2,15 @@ package com.example.speakout.general.classess
 
 import java.util.*
 
+/**
+ * Townhall.kt is a class for Townhall.
+ *
+ * @author GeekPrideSoft (Maurice, Robert, Jean Paul, Venant)
+ *
+ * On my honor, as a Carnegie-Mellon Africa student, I have neither given nor received unauthorized
+ * assistance on this work.
+ *
+ */
 class Townhall(private var townhall_id:String, private var startDate:String,
 private var endDate:String, private var live_date:String,
 private var status:Int=1, private var organizer_id:String, private var details:String)

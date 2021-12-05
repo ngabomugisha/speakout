@@ -9,6 +9,15 @@ import com.example.speakout.R
 import com.example.speakout.general.fragments.ViewTownHallsFragment
 import com.example.speakout.organizer.fragments.CreateTownHallFragment
 
+/**
+ * StudentDashboard.kt is a class for student dashboard.
+ *
+ * @author GeekPrideSoft (Maurice, Robert, Jean Paul, Venant)
+ *
+ * On my honor, as a Carnegie-Mellon Africa student, I have neither given nor received unauthorized
+ * assistance on this work.
+ *
+ */
 class StudentDashboard : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

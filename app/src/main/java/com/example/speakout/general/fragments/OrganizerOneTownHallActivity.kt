@@ -6,6 +6,15 @@ import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.FragmentManager
 import com.example.speakout.organizer.fragments.ViewQuestionsFragment
 
+/**
+ * OrganizerOneTownHallActivity.kt is an activity for town hall organizer
+ *
+ * @author GeekPrideSoft (Maurice, Robert, Jean Paul, Venant)
+ *
+ * On my honor, as a Carnegie-Mellon Africa student, I have neither given nor received unauthorized
+ * assistance on this work.
+ *
+ */
 class OrganizerOneTownHallActivity : AppCompatActivity()
 {
     override fun onCreate(savedInstanceState: Bundle?) {

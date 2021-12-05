@@ -1,5 +1,14 @@
 package com.example.speakout.general.classess
 
+/**
+ * User.kt is made to create a new user.
+ *
+ * @author GeekPrideSoft (Maurice, Robert, Jean Paul, Venant)
+ *
+ * On my honor, as a Carnegie-Mellon Africa student, I have neither given nor received unauthorized
+ * assistance on this work.
+ *
+ */
 class User(private var andrew:String, private var password:String,private var firstname:String, private var lastname:String)
 {
     private var role:String?=null

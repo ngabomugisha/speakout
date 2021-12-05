@@ -7,6 +7,15 @@ import com.example.speakout.design_patterns.strategy.GoToOrganizer
 import com.example.speakout.design_patterns.strategy.GoToStudent
 import com.google.firebase.database.ValueEventListener
 
+/**
+ * DashboardFactory.kt is a factory that will generate a dashboard to a user basing on their roles
+ *
+ * @author GeekPrideSoft (Maurice, Robert, Jean Paul, Venant)
+ *
+ * On my honor, as a Carnegie-Mellon Africa student, I have neither given nor received unauthorized
+ * assistance on this work.
+ *
+ */
 class DashboardFactory
 {
     companion object

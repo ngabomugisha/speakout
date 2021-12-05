@@ -1,5 +1,14 @@
 package com.example.speakout.general.classess
 
+/**
+ * Question.kt is a class for Question
+ *
+ * @author GeekPrideSoft (Maurice, Robert, Jean Paul, Venant)
+ *
+ * On my honor, as a Carnegie-Mellon Africa student, I have neither given nor received unauthorized
+ * assistance on this work.
+ *
+ */
 class Question (private var question_date:String,
                 private var question_poster:String,private var question_townhall:String,
                 private var question_category:String, private var content:String)

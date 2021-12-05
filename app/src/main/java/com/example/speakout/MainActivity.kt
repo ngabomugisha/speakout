@@ -11,8 +11,16 @@ import com.example.speakout.design_patterns.factory.DashboardFactory
 import com.example.speakout.general.activities.SignUpActivity
 import com.example.speakout.general.fragments.OrganizerOneTownHallActivity
 import com.example.speakout.student.activities.ViewQuestionsStudentActivity
-import com.google.android.material.internal.ContextUtils.getActivity
 
+/**
+ * MainActivity.kt is the main program
+ *
+ * @author GeekPrideSoft (Maurice, Robert, Jean Paul, Venant)
+ *
+ * On my honor, as a Carnegie-Mellon Africa student, I have neither given nor received unauthorized
+ * assistance on this work.
+ *
+ */
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
