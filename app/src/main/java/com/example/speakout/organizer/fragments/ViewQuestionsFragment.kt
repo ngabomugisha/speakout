@@ -55,7 +55,7 @@ class ViewQuestionsFragment : Fragment() {
                             val content=it.child("content").value.toString()
                             val date=it.child("date").value.toString()
                             val poster=it.child("posterId").value.toString()
-                            var poster_name=users.child("$poster").child("firstname").value.toString()
+                            var poster_name=users.child("$poster").child("firstName").value.toString()
                             val num_count=2
                             all_questions.add(QuestionClass("$content","$poster_name","$date","$num_count"))
                         }

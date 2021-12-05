@@ -9,7 +9,7 @@ class DatabaseFilterFactory
 {
     companion object
     {
-        fun preference(table:String): DatabaseFilter?
+        fun getValue(table:String): DatabaseFilter?
         {
             if(table=="user")
             {

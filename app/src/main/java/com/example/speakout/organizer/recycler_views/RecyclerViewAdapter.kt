@@ -7,8 +7,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.speakout.R
 import com.example.speakout.organizer.classes.TownHallViewClass
+import com.google.firebase.database.ValueEventListener
 
-class RecyclerViewTownHallAdapter(private var town_halls: ArrayList<TownHallViewClass>) :
+class RecyclerViewTownHallAdapter(private var town_halls: ArrayList<TownHallViewClass>,
+                                  private var listener: OnItemCLickListener
+) :
     RecyclerView.Adapter<RecyclerViewTownHallAdapter.RecyclerViewTownHallHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerViewTownHallHolder {
@@ -25,10 +28,14 @@ class RecyclerViewTownHallAdapter(private var town_halls: ArrayList<TownHallView
     }
 
 
-    class RecyclerViewTownHallHolder (itemView: View): RecyclerView.ViewHolder(itemView)
+    inner class RecyclerViewTownHallHolder (itemView: View): RecyclerView.ViewHolder(itemView), View.OnClickListener
     {
         private lateinit var hall_name: TextView;
         private lateinit var hall_date: TextView;
+
+        init {
+            itemView.setOnClickListener(this)
+        }
         fun bind(hall : TownHallViewClass)
         {
             hall_name=itemView.findViewById(R.id.hall_name_txtvw_id)
@@ -36,6 +43,21 @@ class RecyclerViewTownHallAdapter(private var town_halls: ArrayList<TownHallView
             hall_name.text=hall.getName();
             hall_date.text=hall.getDate();
         }
+
+        override fun onClick(v: View?)
+        {
+            val position=adapterPosition
+            if(position != RecyclerView.NO_POSITION)
+            {
+                listener.onItemClick(position)
+            }
+        }
+
+
+    }
+
+    interface OnItemCLickListener{
+        fun onItemClick(position: Int)
     }
 
 

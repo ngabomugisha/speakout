@@ -18,7 +18,7 @@ import com.google.firebase.database.ValueEventListener
 
 // TODO: Rename parameter arguments, choose names that match
 
-class ViewTownHallsFragment : Fragment() {
+class ViewTownHallsFragment : Fragment(), RecyclerViewTownHallAdapter.OnItemCLickListener {
 
     private var recycler:RecyclerView?=null;
     private var database:DatabaseReference?=null;
@@ -57,8 +57,9 @@ class ViewTownHallsFragment : Fragment() {
                     }
                     i++
                 }
-                val adapter= RecyclerViewTownHallAdapter(halls);
+                val adapter= RecyclerViewTownHallAdapter(halls,this@ViewTownHallsFragment);
                 recycler?.adapter=adapter
+
             }
             override fun onCancelled(error: DatabaseError) {
                 // calling on cancelled method when we receive
@@ -66,5 +67,10 @@ class ViewTownHallsFragment : Fragment() {
                 Toast.makeText(context, "Fail to get data.", Toast.LENGTH_SHORT).show()
             }
         })
+    }
+
+    override fun onItemClick(position: Int)
+    {
+        Toast.makeText(context,"I am clicked", Toast.LENGTH_LONG).show()
     }
 }
