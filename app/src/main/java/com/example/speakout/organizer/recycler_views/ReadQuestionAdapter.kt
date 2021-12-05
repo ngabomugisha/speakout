@@ -24,7 +24,7 @@ import androidx.fragment.app.FragmentActivity
 import com.example.speakout.student.fragments.PostQuestionFragment
 
 class ReadQuestionAdapter(private var questions: ArrayList<QuestionClass>
-,private var listener:QuestionOnClick) :
+,private var listener:QuestionClickInterface) :
 
     RecyclerView.Adapter<ReadQuestionAdapter.ReadQuestionHolder>() {
 
@@ -79,7 +79,7 @@ class ReadQuestionAdapter(private var questions: ArrayList<QuestionClass>
 //        notifyDataSetChanged()
     }
 
-    interface  QuestionOnClick
+    interface  QuestionClickInterface
     {
         fun questionOnClick(position: Int)
     }

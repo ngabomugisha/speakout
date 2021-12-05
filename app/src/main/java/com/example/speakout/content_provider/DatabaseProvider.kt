@@ -27,6 +27,11 @@ class DatabaseProvider:Insert,Select, Update
         database?.child("question/${question.getQuestionId()}")?.setValue(question)
     }
 
+    override fun voteQuestion(voter: String, question: Int, vote: Int)
+    {
+        database?.child("question/$question/votes/$voter/$vote")
+    }
+
     override fun selectTownHalls()
     {
         TODO("Not yet implemented")
@@ -44,26 +49,8 @@ class DatabaseProvider:Insert,Select, Update
 
     override fun selectUser(andrew: String, password: String): User?
     {
-        var user_reference=database.child("user/$andrew")
-        var user:User?=null
-        user_reference?.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                if(snapshot.exists())
-                {
-                    val andrew:String = snapshot.child("andrew").value.toString()
-                    val fname:String=snapshot.child(" firstname").value.toString()
-                    val lname:String=snapshot.child("lastname").value.toString()
-                    val password:String=snapshot.child(" password").value.toString()
-                    val role:String=snapshot.child(" role").value.toString()
-                    user=User(andrew,fname,lname,password)
-                }
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-
-            }
-        })
-        return user
+        TODO("Not yet implemented")
     }
+
 
 }

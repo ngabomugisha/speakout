@@ -33,14 +33,14 @@ class OrganizerOneTownHallActivity : AppCompatActivity(),ReadQuestionAdapter.Que
             {
                 p="Maurice"
             }
-            questions.add(QuestionClass("Can we have a pool",p,"2021-3-7","20"))
+            questions.add(QuestionClass("1","Can we have a pool",p,"2021-3-7","20"))
         }
 
 //        val adapter= ReadQuestionAdapter(questions,t);
 //        recycler?.adapter=adapter
     }
 
-    override fun questionClicked(position: Int) {
+    override fun questionOnClick(position: Int) {
         Toast.makeText(this,"Here is clicked",Toast.LENGTH_LONG).show()
     }
 }

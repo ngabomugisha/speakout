@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
 import android.util.Log
+import android.view.View
 
 import android.widget.Button
 import android.widget.LinearLayout
@@ -43,7 +44,6 @@ class ViewQuestionsStudentActivity : AppCompatActivity() {
 
         differentiateUsers()
         startFragments()
-        Log.d("@@@@@@@@", " >>>ViewQuestionStudentActivity<<<<< This is the activity we started1");
         postClicked()
 
     }

@@ -21,7 +21,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
 
-class ViewQuestionsFragment : Fragment(), ReadQuestionAdapter.QuestionOnClick {
+class ViewQuestionsFragment : Fragment(), ReadQuestionAdapter.QuestionClickInterface {
     private var recycler: RecyclerView?=null;
     private var database:DatabaseReference?=null;
     private var townhall_id:String=""
@@ -67,7 +67,7 @@ class ViewQuestionsFragment : Fragment(), ReadQuestionAdapter.QuestionOnClick {
                                 val poster=it.child("posterId").value.toString()
                                 var poster_name=users.child("$poster").child("firstName").value.toString()
                                 val num_count=2
-                                all_questions.add(QuestionClass("$content","$poster_name","$date","$num_count"))
+                                all_questions.add(QuestionClass("$question_id","$content","$poster_name","$date","$num_count"))
                             }
                         }
                         i++
@@ -82,7 +82,7 @@ class ViewQuestionsFragment : Fragment(), ReadQuestionAdapter.QuestionOnClick {
                             direction: Int
                         ) {
                             adapter.upvoteQuestion(viewHolder.adapterPosition)
-                            Toast.makeText(context,"${viewHolder.adapterPosition}",Toast.LENGTH_LONG).show()
+                            Toast.makeText(context,"${all_questions[viewHolder.adapterPosition].getId()}",Toast.LENGTH_LONG).show()
                         }
                     }
 
