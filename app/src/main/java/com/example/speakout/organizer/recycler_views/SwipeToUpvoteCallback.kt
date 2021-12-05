@@ -45,29 +45,29 @@ abstract class SwipeToUpvoteCallback: ItemTouchHelper.Callback()
 //
 //
 //
-//    override fun onChildDraw(
-//        c: Canvas,
-//        recyclerView: RecyclerView,
-//        viewHolder: RecyclerView.ViewHolder,
-//        dX: Float,
-//        dY: Float,
-//        actionState: Int,
-//        isCurrentlyActive: Boolean
-//    ) {
-//        RecyclerViewSwipeDecorator.Builder(
-//            c,
-//            recyclerView,
-//            viewHolder,
-//            dX,
-//            dY,
-//            actionState,
-//            isCurrentlyActive
-//        )
-//            .addBackgroundColor(backgroundColor)
-//            .addActionIcon(R.drawable.ic_vote)
-//            .create()
-//            .decorate()
-//        super.onChildDraw(c, recyclerView, viewHolder, dX/5, dY, actionState, isCurrentlyActive)
-//    }
+    override fun onChildDraw(
+        c: Canvas,
+        recyclerView: RecyclerView,
+        viewHolder: RecyclerView.ViewHolder,
+        dX: Float,
+        dY: Float,
+        actionState: Int,
+        isCurrentlyActive: Boolean
+    ) {
+        RecyclerViewSwipeDecorator.Builder(
+            c,
+            recyclerView,
+            viewHolder,
+            dX,
+            dY,
+            actionState,
+            isCurrentlyActive
+        )
+            .addBackgroundColor(R.color.design_default_color_primary)
+            .addActionIcon(R.drawable.ic_vote)
+            .create()
+            .decorate()
+        super.onChildDraw(c, recyclerView, viewHolder, dX/5, dY, actionState, isCurrentlyActive)
+    }
 
 }
