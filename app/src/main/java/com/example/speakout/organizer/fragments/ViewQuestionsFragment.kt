@@ -18,10 +18,16 @@ import com.example.speakout.R
 import com.example.speakout.organizer.classes.QuestionClass
 import com.example.speakout.organizer.recycler_views.ReadQuestionAdapter
 import com.example.speakout.content_provider.DatabaseConnection
+<<<<<<< Updated upstream
 import com.example.speakout.design_patterns.factory.DashboardFactory
 import com.example.speakout.organizer.recycler_views.SwipeToUpvoteCallback
 import com.example.speakout.student.activities.StudentDashboard
 import com.example.speakout.student.fragments.PostQuestionFragment
+=======
+import com.example.speakout.organizer.classes.MaxHeap
+import com.example.speakout.organizer.recycler_views.SwipeToUpvoteCallback
+import com.example.speakout.utils.Helper
+>>>>>>> Stashed changes
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -31,7 +37,11 @@ class ViewQuestionsFragment : Fragment(), ReadQuestionAdapter.QuestionClickInter
     private var recycler: RecyclerView?=null;
     private var database:DatabaseReference?=null;
     private var townhall_id:String=""
+    private var number:String=""
     private val all_questions:ArrayList<QuestionClass> = ArrayList();
+    var sp: SharedPreferences?=null
+    var savedAndrewId:String?=null
+    var savedRole: String? =null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -39,7 +49,12 @@ class ViewQuestionsFragment : Fragment(), ReadQuestionAdapter.QuestionClickInter
         // connecting to database
         database= DatabaseConnection.connect()
         townhall_id= this.arguments?.getString("townhall_id").toString()
+        number=this.arguments?.getString("number").toString()
 
+        sp=activity?.getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
+        savedAndrewId=sp?.getString("ANDREW_ID", null)
+        savedRole =sp?.getString("ROLE", null)
+        Toast.makeText(context,"$savedRole",Toast.LENGTH_LONG).show()
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_view_questions, container, false)
     }
@@ -61,7 +76,7 @@ class ViewQuestionsFragment : Fragment(), ReadQuestionAdapter.QuestionClickInter
                     var users=snapshot.child("user")
                     var i=0
                     all_questions.clear()
-
+                    var heap: MaxHeap=MaxHeap();
                     questions.forEach{
                         if(i!=0)
                         {
@@ -75,15 +90,27 @@ class ViewQuestionsFragment : Fragment(), ReadQuestionAdapter.QuestionClickInter
                                 var poster_name=users.child("$poster").child("firstName").value.toString()
                                 val num_count=it.child("votes").childrenCount
                                 val votes=it.child("votes").childrenCount
+                                heap.insert(QuestionClass("$question_id","$content","$poster_name","$date","11","$votes"))
                                 all_questions.add(QuestionClass("$question_id","$content","$poster_name","$date","11","$votes"))
                             }
                         }
                         i++
                     }
-                    val adapter= ReadQuestionAdapter(all_questions,this@ViewQuestionsFragment)
+                    var adapter=ReadQuestionAdapter(all_questions,this@ViewQuestionsFragment)
+                   if(savedRole=="organizer")
+                    {
+                        adapter = ReadQuestionAdapter(heap.get(Helper.toInteger(number)), this@ViewQuestionsFragment)
+                        recycler?.adapter=adapter
+                        adapter.notifyDataSetChanged()
+                   }
+                    if(savedRole=="student")
+                    {
+                        adapter = ReadQuestionAdapter(heap.get(Helper.toInteger(number)), this@ViewQuestionsFragment)
+                        recycler?.adapter=adapter
+                        adapter.notifyDataSetChanged()
+                    }
 
-                    recycler?.adapter=adapter
-                    adapter.notifyDataSetChanged()
+
 
                     val swipeUpvote = object : SwipeToUpvoteCallback(){
                         override fun onSwiped(

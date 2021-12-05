@@ -29,5 +29,7 @@ class Helper
         }
 
         fun changeDate(date:String)=date.replace('/','-')
+
+        fun toInteger(s:String?)=Integer.parseInt(s)
     }
 }
