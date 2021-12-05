@@ -11,6 +11,7 @@ import android.widget.RadioButton
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import com.example.speakout.R
+import com.example.speakout.R.layout.fragment_post_question
 import com.example.speakout.general.classess.Question
 import com.example.speakout.content_provider.DatabaseConnection
 import com.example.speakout.content_provider.DatabaseProvider
@@ -45,7 +46,7 @@ class PostQuestionFragment : DialogFragment()
         provider= DatabaseConnection.databaseProvider()
         townhall_id=activity?.intent?.getStringExtra("townhall_id").toString()
         // Inflate the layout for this fragment
-        var rootView = inflater.inflate(R.layout.fragment_post_question, container, false)
+        var rootView = inflater.inflate(fragment_post_question, container, false)
         initializeButtons(rootView)
         switchCategory()
         closeDialog()

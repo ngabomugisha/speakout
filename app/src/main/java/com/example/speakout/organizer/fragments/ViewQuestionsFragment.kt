@@ -1,6 +1,7 @@
 package com.example.speakout.organizer.fragments
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
@@ -9,13 +10,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.speakout.R
 import com.example.speakout.organizer.classes.QuestionClass
 import com.example.speakout.organizer.recycler_views.ReadQuestionAdapter
 import com.example.speakout.content_provider.DatabaseConnection
+import com.example.speakout.design_patterns.factory.DashboardFactory
 import com.example.speakout.organizer.recycler_views.SwipeToUpvoteCallback
+import com.example.speakout.student.activities.StudentDashboard
+import com.example.speakout.student.fragments.PostQuestionFragment
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -120,10 +126,29 @@ class ViewQuestionsFragment : Fragment(), ReadQuestionAdapter.QuestionClickInter
             }
         })
     }
-
+    private fun startPostFragments()
+    {
+        var bundle:Bundle= Bundle()
+        bundle.putString("townhall_id",townhall_id)
+        val fragment:Fragment= Fragment_comment()
+        fragment.arguments=bundle
+        val manager: FragmentManager = requireActivity().supportFragmentManager
+        val transaction: FragmentTransaction = manager.beginTransaction()
+        transaction.setReorderingAllowed(true)
+        transaction.add(com.example.speakout.R.id.view_question_fragment_id, fragment,null)
+        transaction.commit()
+    }
+    //organizer_questions_recy_vw_id organizer_questions_recy_vw_id
     override fun questionOnClick(position: Int)
     {
-        Toast.makeText(context,"flsfnsdgmszldgzsdf $position",Toast.LENGTH_LONG).show()
+//        var intent= Intent(activity, StudentDashboard::class.java)
+//        startActivity(intent)
+        var fragment = Fragment_comment()
+        var bundle:Bundle= Bundle()
+        bundle.putString("townhall_id",townhall_id)
+        fragment.arguments=bundle
+        fragment.show(requireActivity().supportFragmentManager, "DialogFragment")
+
     }
 
 }

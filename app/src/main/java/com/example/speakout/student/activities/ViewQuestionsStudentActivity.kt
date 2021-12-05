@@ -20,6 +20,7 @@ import com.example.speakout.databinding.ActivityMainBinding
 import com.example.speakout.databinding.ActivityViewQuestionsStudentBinding
 import com.example.speakout.general.fragments.ViewTownHallsFragment
 import com.example.speakout.organizer.fragments.CreateTownHallFragment
+import com.example.speakout.organizer.fragments.Fragment_comment
 import com.example.speakout.organizer.fragments.ViewQuestionsFragment
 import com.example.speakout.student.fragments.PostQuestionFragment
 
@@ -80,6 +81,7 @@ class ViewQuestionsStudentActivity : AppCompatActivity() {
         transaction.add(com.example.speakout.R.id.view_towhalls_questions_student_fragment_id, fragment,null)
         transaction.commit()
     }
+
 
     private fun differentiateUsers() {
         val sp: SharedPreferences? =this?.getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
