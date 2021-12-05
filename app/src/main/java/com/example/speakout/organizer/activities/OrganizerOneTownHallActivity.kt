@@ -33,7 +33,7 @@ class OrganizerOneTownHallActivity : AppCompatActivity(),ReadQuestionAdapter.Que
             {
                 p="Maurice"
             }
-            questions.add(QuestionClass("1","Can we have a pool",p,"2021-3-7","20"))
+            questions.add(QuestionClass("1","Can we have a pool",p,"2021-3-7","20","4"))
         }
 
 //        val adapter= ReadQuestionAdapter(questions,t);

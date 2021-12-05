@@ -66,8 +66,9 @@ class ViewQuestionsFragment : Fragment(), ReadQuestionAdapter.QuestionClickInter
                                 val date=it.child("date").value.toString()
                                 val poster=it.child("posterId").value.toString()
                                 var poster_name=users.child("$poster").child("firstName").value.toString()
-                                val num_count=2
-                                all_questions.add(QuestionClass("$question_id","$content","$poster_name","$date","$num_count"))
+                                val num_count=it.child("votes").childrenCount
+                                val votes=it.child("votes").childrenCount
+                                all_questions.add(QuestionClass("$question_id","$content","$poster_name","$date","11","$votes"))
                             }
                         }
                         i++

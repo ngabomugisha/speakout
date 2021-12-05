@@ -47,6 +47,7 @@ class ReadQuestionAdapter(private var questions: ArrayList<QuestionClass>
         private lateinit var num: TextView
         private lateinit var date: TextView
         private lateinit var comment: TextView
+        private lateinit var votes:TextView
 
         init {
             itemView.setOnClickListener(this)
@@ -57,12 +58,14 @@ class ReadQuestionAdapter(private var questions: ArrayList<QuestionClass>
                 itemView.findViewById<TextView>(com.example.speakout.R.id.question_asker_org_id)
             num = itemView.findViewById<TextView>(com.example.speakout.R.id.comm_num_id)
             date = itemView.findViewById<TextView>(com.example.speakout.R.id.date_asked)
+            votes=itemView.findViewById<TextView>(com.example.speakout.R.id.votes_num)
 
             comment = itemView.findViewById<TextView>(com.example.speakout.R.id.btn_comment)
             quest.text = question.getQuestion();
             poster.text = question.getPoster()
             num.text = question.getNumberOfComments()
             date.text = question.getDate()
+            votes.text=question.getVotes()
         }
 
         override fun onClick(v: View?) {
@@ -74,9 +77,7 @@ class ReadQuestionAdapter(private var questions: ArrayList<QuestionClass>
         }
     }
     fun upvoteQuestion(index: Int) {
-//        Toast.makeText(requireContext(),"flsfnsdgmszldgzsdf $index",Toast.LENGTH_LONG).show()
-        Log.d("**********", "swiped")
-//        notifyDataSetChanged()
+
     }
 
     interface  QuestionClickInterface
