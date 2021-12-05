@@ -21,12 +21,15 @@ import com.google.firebase.database.ValueEventListener
 class ViewQuestionsFragment : Fragment() {
     private var recycler: RecyclerView?=null;
     private var database:DatabaseReference?=null;
+    private var townhall_id:String=""
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // connecting to database
         database= DatabaseConnection.connect()
+        townhall_id= this.arguments?.getString("townhall_id").toString()
+        
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_view_questions, container, false)
     }
@@ -51,13 +54,17 @@ class ViewQuestionsFragment : Fragment() {
                     questions.forEach{
                         if(i!=0)
                         {
-                            val question_id=it.child("questionId").value.toString()
-                            val content=it.child("content").value.toString()
-                            val date=it.child("date").value.toString()
-                            val poster=it.child("posterId").value.toString()
-                            var poster_name=users.child("$poster").child("firstName").value.toString()
-                            val num_count=2
-                            all_questions.add(QuestionClass("$content","$poster_name","$date","$num_count"))
+                            val townhall=it.child("townhall").value.toString()
+                            if(townhall==townhall_id)
+                            {
+                                val question_id=it.child("questionId").value.toString()
+                                val content=it.child("content").value.toString()
+                                val date=it.child("date").value.toString()
+                                val poster=it.child("posterId").value.toString()
+                                var poster_name=users.child("$poster").child("firstName").value.toString()
+                                val num_count=2
+                                all_questions.add(QuestionClass("$content","$poster_name","$date","$num_count"))
+                            }
                         }
                         i++
                     }

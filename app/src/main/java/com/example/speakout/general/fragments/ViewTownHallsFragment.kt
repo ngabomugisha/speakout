@@ -1,5 +1,6 @@
 package com.example.speakout.general.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,6 +12,8 @@ import com.example.speakout.R
 import com.example.speakout.organizer.classes.TownHallViewClass
 import com.example.speakout.organizer.recycler_views.RecyclerViewTownHallAdapter
 import com.example.speakout.content_provider.DatabaseConnection
+import com.example.speakout.organizer.fragments.ViewQuestionsFragment
+import com.example.speakout.student.activities.ViewQuestionsStudentActivity
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -22,6 +25,7 @@ class ViewTownHallsFragment : Fragment(), RecyclerViewTownHallAdapter.OnItemCLic
 
     private var recycler:RecyclerView?=null;
     private var database:DatabaseReference?=null;
+    private var halls:ArrayList<TownHallViewClass> = ArrayList();
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,14 +50,14 @@ class ViewTownHallsFragment : Fragment(), RecyclerViewTownHallAdapter.OnItemCLic
                 var townhalls=snapshot.child("townhall").children
                 var l:ArrayList<String> = ArrayList()
                 var i:Int=0
-                val halls:ArrayList<TownHallViewClass> = ArrayList();
+
                 townhalls.forEach {
                     if(i!=0)
                     {
                         val townhall_id:String=it.child("townhallId").value.toString()
                         val townhall_details:String=it.child("details").value.toString()
                         val townhall_date:String=it.child("liveDate").value.toString()
-                        halls.add(TownHallViewClass(townhall_details,townhall_date))
+                        halls.add(TownHallViewClass(townhall_id,townhall_details,townhall_date))
                     }
                     i++
                 }
@@ -71,6 +75,8 @@ class ViewTownHallsFragment : Fragment(), RecyclerViewTownHallAdapter.OnItemCLic
 
     override fun onItemClick(position: Int)
     {
-        Toast.makeText(context,"I am clicked", Toast.LENGTH_LONG).show()
+        val intent = Intent(activity, ViewQuestionsStudentActivity::class.java)
+        intent.putExtra("townhall_id", halls[position].getId())
+        startActivity(intent)
     }
 }
