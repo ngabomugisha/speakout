@@ -54,13 +54,13 @@ class MainActivity : AppCompatActivity() {
         val sp: SharedPreferences =getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
         val savedAndrewId:String?=sp.getString("ANDREW_ID", null)
         val savedRole: String? =sp.getString("ROLE", null)
-        if(savedAndrewId!=null&&savedRole=="organizer")
+        if(savedAndrewId!=null)
         {
             startActivity(DashboardFactory.decideDashboard(this,"organizer")?.goToDashboard())
         }
         else
         {
-            startActivity(DashboardFactory.decideDashboard(this,"student")?.goToDashboard())
+//            startActivity(DashboardFactory.decideDashboard(this,"student")?.goToDashboard())
         }
     }
     private fun loginClicked()

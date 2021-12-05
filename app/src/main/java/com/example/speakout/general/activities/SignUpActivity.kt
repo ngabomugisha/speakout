@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import com.example.speakout.R
 import com.example.speakout.content_provider.DatabaseConnection
 import com.example.speakout.databinding.ActivitySignUpBinding
@@ -41,7 +42,11 @@ class SignUpActivity : AppCompatActivity() {
         signup_btn=binding.signupSignupBtnId
         updateCount()
         signup_btn.setOnClickListener {
-            signupBtnClicked()
+            if (signUpValidate())
+            {
+                signupBtnClicked()
+            }
+
         }
 
     }
@@ -60,6 +65,24 @@ class SignUpActivity : AppCompatActivity() {
         startActivity(intent)
 
     }
+
+    private fun signUpValidate(): Boolean
+    {
+        val uid:String=andrew_id_signup!!.text.toString()
+        val fn:String=firstname!!.text.toString()
+        val pwd:String=password_signup!!.text.toString()
+        val ln:String=lastname!!.text.toString()
+
+        if(uid.trim().isEmpty() || fn.trim().isEmpty() || pwd.trim().isEmpty() || ln.trim().isEmpty())
+        {
+            Toast.makeText(this@SignUpActivity, "All fields are required!", Toast.LENGTH_LONG)
+                .show()
+            return false
+        }
+        return true;
+    }
+
+
 
     private fun updateCount()
     {
