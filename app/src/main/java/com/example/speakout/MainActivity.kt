@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity() {
         }
         else
         {
-            Toast.makeText(this,"not saved", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(this,"not saved", Toast.LENGTH_SHORT).show()
 //            startActivity(DashboardFactory.decideDashboard(this,"student")?.goToDashboard())
 //            signup first if you are new here
             val intent:Intent= Intent(this,SignUpActivity::class.java)
