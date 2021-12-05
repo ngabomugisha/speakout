@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import com.example.speakout.R
@@ -14,6 +15,9 @@ import com.example.speakout.general.classess.Question
 import com.example.speakout.utils.Helper
 
 class Fragment_comment : DialogFragment() {
+
+
+   private var btn_comment_sub : Button?= null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
