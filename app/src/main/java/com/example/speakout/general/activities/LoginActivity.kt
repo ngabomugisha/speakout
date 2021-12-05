@@ -16,6 +16,15 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 
+/**
+ * LoginActivity.kt is enabling registered users to log into speakout app
+ *
+ * @author GeekPrideSoft (Maurice, Robert, Jean Paul, Venant)
+ *
+ * On my honor, as a Carnegie-Mellon Africa student, I have neither given nor received unauthorized
+ * assistance on this work.
+ *
+ */
 class LoginActivity : AppCompatActivity() {
     private lateinit var andrew_id_login_id: EditText
     private lateinit var password: EditText

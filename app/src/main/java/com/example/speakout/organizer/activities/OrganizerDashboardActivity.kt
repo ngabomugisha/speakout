@@ -19,6 +19,15 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import java.util.*
 
+/**
+ * OrganizerDashboardActivity.kt is a class for town hall organizer dashboard.
+ *
+ * @author GeekPrideSoft (Maurice, Robert, Jean Paul, Venant)
+ *
+ * On my honor, as a Carnegie-Mellon Africa student, I have neither given nor received unauthorized
+ * assistance on this work.
+ *
+ */
 class OrganizerDashboardActivity : AppCompatActivity() {
     private var beginTownHall:Button?=null;
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -9,6 +9,15 @@ import com.example.speakout.R
 import com.example.speakout.organizer.classes.QuestionClass
 import com.example.speakout.organizer.recycler_views.ReadQuestionAdapter
 
+/**
+ * OrganizerOneTownHallActivity.kt is an activity for one town hall organizer
+ *
+ * @author GeekPrideSoft (Maurice, Robert, Jean Paul, Venant)
+ *
+ * On my honor, as a Carnegie-Mellon Africa student, I have neither given nor received unauthorized
+ * assistance on this work.
+ *
+ */
 class OrganizerOneTownHallActivity : AppCompatActivity(),ReadQuestionAdapter.QuestionClickInterface {
     private var recycler: RecyclerView?=null;
     private var lay:Layout?=null;

@@ -19,8 +19,16 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
 
-// TODO: Rename parameter arguments, choose names that match
 
+/**
+ * ViewTownHallsFragment.kt is a fragment for viewing a town hall.
+ *
+ * @author GeekPrideSoft (Maurice, Robert, Jean Paul, Venant)
+ *
+ * On my honor, as a Carnegie-Mellon Africa student, I have neither given nor received unauthorized
+ * assistance on this work.
+ *
+ */
 class ViewTownHallsFragment : Fragment(), RecyclerViewTownHallAdapter.OnItemCLickListener {
 
     private var recycler:RecyclerView?=null;

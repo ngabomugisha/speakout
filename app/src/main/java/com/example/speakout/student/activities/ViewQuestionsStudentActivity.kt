@@ -24,6 +24,15 @@ import com.example.speakout.organizer.fragments.Fragment_comment
 import com.example.speakout.organizer.fragments.ViewQuestionsFragment
 import com.example.speakout.student.fragments.PostQuestionFragment
 
+/**
+ * ViewQuestionsStudentActivity.kt is an activity to view student questions
+ *
+ * @author GeekPrideSoft (Maurice, Robert, Jean Paul, Venant)
+ *
+ * On my honor, as a Carnegie-Mellon Africa student, I have neither given nor received unauthorized
+ * assistance on this work.
+ *
+ */
 class ViewQuestionsStudentActivity : AppCompatActivity() {
     private lateinit var binding: ActivityViewQuestionsStudentBinding
     private lateinit var post_btn:Button
