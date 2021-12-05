@@ -85,12 +85,13 @@ class ViewQuestionsFragment : Fragment(), ReadQuestionAdapter.QuestionClickInter
                     recycler?.adapter=adapter
                     adapter.notifyDataSetChanged()
 
-                    val swipeUpvote = object : SwipeToUpvoteCallback(requireContext()){
+                    val swipeUpvote = object : SwipeToUpvoteCallback(){
                         override fun onSwiped(
                             viewHolder: RecyclerView.ViewHolder,
                             direction: Int
                         ) {
-                            adapter.upvoteQuestion(viewHolder.adapterPosition)
+                            val position = viewHolder.adapterPosition
+//                            adapter.upvoteQuestion(viewHolder.adapterPosition)
                             // Using a content provider, vote
                             val sp: SharedPreferences? =activity?.getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
                             val savedAndrewId:String?=sp?.getString("ANDREW_ID", null)
