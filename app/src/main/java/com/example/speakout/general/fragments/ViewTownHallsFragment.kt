@@ -46,7 +46,7 @@ class ViewTownHallsFragment : Fragment(), RecyclerViewTownHallAdapter.OnItemCLic
     {
         database?.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-
+                halls.clear()
                 var townhalls=snapshot.child("townhall").children
                 var l:ArrayList<String> = ArrayList()
                 var i:Int=0

@@ -34,6 +34,7 @@ class PostQuestionFragment : DialogFragment()
     private var question: TextInputEditText?=null
     private var category:String?=null;
     private var count:Int=0
+    private var townhall_id:String=""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,6 +43,7 @@ class PostQuestionFragment : DialogFragment()
         // connect to the database
         database = DatabaseConnection.connect()
         provider= DatabaseConnection.databaseProvider()
+        townhall_id=activity?.intent?.getStringExtra("townhall_id").toString()
         // Inflate the layout for this fragment
         var rootView = inflater.inflate(R.layout.fragment_post_question, container, false)
         initializeButtons(rootView)
@@ -89,8 +91,9 @@ class PostQuestionFragment : DialogFragment()
                 val q: String? =question?.text.toString()
                 val date: String =Helper.changeDate(Helper.todayDate())
                 val saveQuestion: Question = Question("$date","$savedAndrewId"
-                    ,"${Helper.changeDate(Helper.todayDate())}","$category","$q")
+                    ,"$townhall_id","$category","$q")
                 saveQuestion.setId(count)
+                Toast.makeText(context,"$count",Toast.LENGTH_LONG).show()
                 saveQuestion.setParent(saveQuestion.getQuestionId())
                 provider?.insertQuestion(saveQuestion)
                 Toast.makeText(context,getString(R.string.success_msg),Toast.LENGTH_LONG).show()
