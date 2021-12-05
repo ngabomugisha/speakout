@@ -36,8 +36,8 @@ class OrganizerOneTownHallActivity : AppCompatActivity(),ReadQuestionAdapter.Que
             questions.add(QuestionClass("Can we have a pool",p,"2021-3-7","20"))
         }
 
-        val adapter= ReadQuestionAdapter(questions,this);
-        recycler?.adapter=adapter
+//        val adapter= ReadQuestionAdapter(questions,t);
+//        recycler?.adapter=adapter
     }
 
     override fun questionClicked(position: Int) {

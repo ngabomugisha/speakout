@@ -17,13 +17,15 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.speakout.organizer.fragments.Fragment_comment
 import android.R
-import android.view.OnReceiveContentListener
+
+import androidx.core.content.ContentProviderCompat.requireContext
 
 import androidx.fragment.app.FragmentActivity
 import com.example.speakout.student.fragments.PostQuestionFragment
 
+class ReadQuestionAdapter(private var questions: ArrayList<QuestionClass>
+,private var listener:QuestionOnClick) :
 
-class ReadQuestionAdapter(private var questions: ArrayList<QuestionClass>, private var listener: QuestionClickInterface) :
     RecyclerView.Adapter<ReadQuestionAdapter.ReadQuestionHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReadQuestionHolder {
@@ -38,7 +40,8 @@ class ReadQuestionAdapter(private var questions: ArrayList<QuestionClass>, priva
         holder.bind(questions[position])
     }
 
-    inner class ReadQuestionHolder (itemView: View): RecyclerView.ViewHolder(itemView),View.OnClickListener {
+    inner class ReadQuestionHolder (itemView: View): RecyclerView.ViewHolder(itemView), View.OnClickListener {
+
         private lateinit var quest: TextView;
         private lateinit var poster: TextView;
         private lateinit var num: TextView
@@ -62,17 +65,22 @@ class ReadQuestionAdapter(private var questions: ArrayList<QuestionClass>, priva
             date.text = question.getDate()
         }
 
-        override fun onClick(v: View?)
-        {
+        override fun onClick(v: View?) {
             val position=adapterPosition
-            if(position != RecyclerView.NO_POSITION)
+            if (position != RecyclerView.NO_POSITION)
             {
-                listener.questionClicked(position)
+                listener.questionOnClick(position)
             }
         }
     }
-    interface QuestionClickInterface
+    fun upvoteQuestion(index: Int) {
+//        Toast.makeText(requireContext(),"flsfnsdgmszldgzsdf $index",Toast.LENGTH_LONG).show()
+        Log.d("**********", "swiped")
+//        notifyDataSetChanged()
+    }
+
+    interface  QuestionOnClick
     {
-        fun questionClicked(position: Int)
+        fun questionOnClick(position: Int)
     }
 }

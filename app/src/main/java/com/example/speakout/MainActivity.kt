@@ -8,7 +8,6 @@ import android.os.Bundle
 import android.widget.Toast
 import com.example.speakout.databinding.ActivityMainBinding
 import com.example.speakout.design_patterns.factory.DashboardFactory
-import com.example.speakout.general.activities.LoginActivity
 import com.example.speakout.general.activities.SignUpActivity
 import com.example.speakout.general.fragments.OrganizerOneTownHallActivity
 import com.example.speakout.student.activities.ViewQuestionsStudentActivity
@@ -20,26 +19,14 @@ class MainActivity : AppCompatActivity() {
         binding= ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-//        Getting saved Id during first login
-        val sp: SharedPreferences =getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
-        val savedAndrewId:String?=sp.getString("ANDREW_ID", null)
-        val savedRole:String?=sp.getString("ROLE", null)
+//      Check if the user already exist and redirect them to their dashboard respectively
         checkPreferences()
 
-        val question=binding.question
-        question.setOnClickListener {
-            questionClicked()
-        }
+    }
 
-        val post=binding.post
-        post.setOnClickListener {
-            postClicked()
-        }
-
-        val login=binding.login
-        login.setOnClickListener {
-            loginClicked()
-        }
+    override fun onResume() {
+        super.onResume()
+        checkPreferences()
     }
     private fun checkPreferences()
     {
@@ -48,19 +35,19 @@ class MainActivity : AppCompatActivity() {
         val savedRole: String? =sp.getString("ROLE", null)
         if(savedAndrewId!=null)
         {
-            Toast.makeText(this,"$savedRole", Toast.LENGTH_SHORT).show()
+
+//            Toast.makeText(this,"$savedRole", Toast.LENGTH_SHORT).show()
+
             startActivity(DashboardFactory.decideDashboard(this,"$savedRole")?.goToDashboard())
         }
         else
         {
             Toast.makeText(this,"not saved", Toast.LENGTH_SHORT).show()
 //            startActivity(DashboardFactory.decideDashboard(this,"student")?.goToDashboard())
+//            signup first if you are new here
+            val intent:Intent= Intent(this,SignUpActivity::class.java)
+            startActivity(intent)
         }
-    }
-    private fun loginClicked()
-    {
-        val intent:Intent= Intent(this,SignUpActivity::class.java)
-        startActivity(intent)
     }
 
     private fun postClicked()

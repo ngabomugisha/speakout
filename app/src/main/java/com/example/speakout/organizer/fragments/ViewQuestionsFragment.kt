@@ -3,24 +3,25 @@ package com.example.speakout.organizer.fragments
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.speakout.R
 import com.example.speakout.organizer.classes.QuestionClass
 import com.example.speakout.organizer.recycler_views.ReadQuestionAdapter
 import com.example.speakout.content_provider.DatabaseConnection
-import com.example.speakout.organizer.classes.TownHallViewClass
-import com.example.speakout.organizer.recycler_views.RecyclerViewTownHallAdapter
+import com.example.speakout.organizer.recycler_views.SwipeToUpvoteCallback
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
 
-class ViewQuestionsFragment : Fragment(), ReadQuestionAdapter.QuestionClickInterface {
+class ViewQuestionsFragment : Fragment(), ReadQuestionAdapter.QuestionOnClick {
     private var recycler: RecyclerView?=null;
     private var database:DatabaseReference?=null;
     private var townhall_id:String=""
@@ -71,8 +72,22 @@ class ViewQuestionsFragment : Fragment(), ReadQuestionAdapter.QuestionClickInter
                         }
                         i++
                     }
-                    val adapter= ReadQuestionAdapter(all_questions, this@ViewQuestionsFragment);
+                    val adapter= ReadQuestionAdapter(all_questions,this@ViewQuestionsFragment)
+
                     recycler?.adapter=adapter
+
+                    val swipeUpvote = object : SwipeToUpvoteCallback(requireContext()){
+                        override fun onSwiped(
+                            viewHolder: RecyclerView.ViewHolder,
+                            direction: Int
+                        ) {
+                            adapter.upvoteQuestion(viewHolder.adapterPosition)
+                            Toast.makeText(context,"${viewHolder.adapterPosition}",Toast.LENGTH_LONG).show()
+                        }
+                    }
+
+                    val touchHelper  = ItemTouchHelper(swipeUpvote)
+                        touchHelper.attachToRecyclerView(this@ViewQuestionsFragment.recycler)
                 }
                 else
                 {
@@ -87,8 +102,9 @@ class ViewQuestionsFragment : Fragment(), ReadQuestionAdapter.QuestionClickInter
         })
     }
 
-    override fun questionClicked(position: Int) {
-        Toast.makeText(context,"Clicked $position",Toast.LENGTH_LONG).show()
+    override fun questionOnClick(position: Int)
+    {
+        Toast.makeText(context,"flsfnsdgmszldgzsdf $position",Toast.LENGTH_LONG).show()
     }
 
 }
