@@ -34,7 +34,16 @@ class LoginActivity : AppCompatActivity() {
 //            loginBtnClicked()
             saveSession()//save andrew id on the first login
         }
+        val signup=binding.signupLoginBtnId
+        signup.setOnClickListener {
+            signupBtnClicked()
+        }
 
+    }
+
+    private fun signupBtnClicked() {
+        val intent:Intent= Intent(this,SignUpActivity::class.java)
+        startActivity(intent)
     }
 
     private fun loginBtnClicked()
