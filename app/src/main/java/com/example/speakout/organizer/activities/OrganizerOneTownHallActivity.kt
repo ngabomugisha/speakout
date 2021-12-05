@@ -3,20 +3,21 @@ package com.example.speakout.organizer.activities
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Layout
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.speakout.R
 import com.example.speakout.organizer.classes.QuestionClass
 import com.example.speakout.organizer.recycler_views.ReadQuestionAdapter
 
-class OrganizerOneTownHallActivity : AppCompatActivity() {
+class OrganizerOneTownHallActivity : AppCompatActivity(),ReadQuestionAdapter.QuestionClickInterface {
     private var recycler: RecyclerView?=null;
     private var lay:Layout?=null;
+    val questions:ArrayList<QuestionClass> = ArrayList();
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_organizer_one_town_hall)
 
         recycler=findViewById<RecyclerView>(R.id.organizer_questions_recy_vw_id)
-        val questions:ArrayList<QuestionClass> = ArrayList();
         var p:String?=null;
         for (i in 1..30)
         {
@@ -35,7 +36,11 @@ class OrganizerOneTownHallActivity : AppCompatActivity() {
             questions.add(QuestionClass("Can we have a pool",p,"2021-3-7","20"))
         }
 
-        val adapter= ReadQuestionAdapter(questions);
+        val adapter= ReadQuestionAdapter(questions,this);
         recycler?.adapter=adapter
+    }
+
+    override fun questionClicked(position: Int) {
+        Toast.makeText(this,"Here is clicked",Toast.LENGTH_LONG).show()
     }
 }

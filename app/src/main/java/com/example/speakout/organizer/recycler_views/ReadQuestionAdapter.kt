@@ -17,12 +17,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.speakout.organizer.fragments.Fragment_comment
 import android.R
+import android.view.OnReceiveContentListener
 
 import androidx.fragment.app.FragmentActivity
 import com.example.speakout.student.fragments.PostQuestionFragment
 
 
-class ReadQuestionAdapter(private var questions: ArrayList<QuestionClass>) :
+class ReadQuestionAdapter(private var questions: ArrayList<QuestionClass>, private var listener: QuestionClickInterface) :
     RecyclerView.Adapter<ReadQuestionAdapter.ReadQuestionHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReadQuestionHolder {
@@ -33,33 +34,20 @@ class ReadQuestionAdapter(private var questions: ArrayList<QuestionClass>) :
         return this.questions.size;
     }
 
-    override fun onBindViewHolder(
-        holder: ReadQuestionHolder,
-        position: Int
-    ) {
+    override fun onBindViewHolder(holder: ReadQuestionHolder,position: Int) {
         holder.bind(questions[position])
-        holder.itemView.setOnClickListener(object :View.OnClickListener{
-            override fun onClick(v: View?) {
-
-                val activity=v!!.context as AppCompatActivity
-                val commentFragment =  Fragment_comment()
-//                activity.supportFragmentManager.beginTransaction().replace(R.id.dialog_fragment).addToBackStack(null).commit()
-
-//                val transaction: FragmentTransaction = activity.supportFragmentManager.beginTransaction()
-//                transaction.setReorderingAllowed(true)
-//                transaction.add(com.example.speakout.R.id.post_question_fragment_id, PostQuestionFragment::class.java,null)
-//                transaction.commit()
-            }
-//            organizer_questions_recy_vw_id
-        })
     }
 
-    class ReadQuestionHolder (itemView: View): RecyclerView.ViewHolder(itemView) {
+    inner class ReadQuestionHolder (itemView: View): RecyclerView.ViewHolder(itemView),View.OnClickListener {
         private lateinit var quest: TextView;
         private lateinit var poster: TextView;
         private lateinit var num: TextView
         private lateinit var date: TextView
         private lateinit var comment: TextView
+
+        init {
+            itemView.setOnClickListener(this)
+        }
         fun bind(question: QuestionClass) {
             quest = itemView.findViewById<TextView>(com.example.speakout.R.id.asked_question_id)
             poster =
@@ -68,14 +56,23 @@ class ReadQuestionAdapter(private var questions: ArrayList<QuestionClass>) :
             date = itemView.findViewById<TextView>(com.example.speakout.R.id.date_asked)
 
             comment = itemView.findViewById<TextView>(com.example.speakout.R.id.btn_comment)
-            comment.setOnClickListener {
-                Log.d("&&&&&&&&&&&&&77", "comment clicked"+itemView.toString())
-//                startFragment(itemView)
-            }
             quest.text = question.getQuestion();
             poster.text = question.getPoster()
             num.text = question.getNumberOfComments()
             date.text = question.getDate()
         }
+
+        override fun onClick(v: View?)
+        {
+            val position=adapterPosition
+            if(position != RecyclerView.NO_POSITION)
+            {
+                listener.questionClicked(position)
+            }
+        }
+    }
+    interface QuestionClickInterface
+    {
+        fun questionClicked(position: Int)
     }
 }

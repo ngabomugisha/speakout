@@ -25,31 +25,35 @@ class ViewQuestionsStudentActivity : AppCompatActivity() {
     private lateinit var post_btn:Button
     private var townhall_id:String=""
     private var post_layout:LinearLayout?=null
+    private var view_questions:LinearLayout?=null
+    private var fragment_layout:LinearLayout?=null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding= ActivityViewQuestionsStudentBinding.inflate(layoutInflater)
         setContentView(binding.root)
         post_btn=binding.postQuestionBtnId
-        post_layout=binding.aboveLayoutId
+        post_layout=binding.aboveLayoutId1
+        view_questions=binding.aboveLayoutId
+        fragment_layout=binding.fragmentLayoutId
+
 
         townhall_id= intent.getStringExtra("townhall_id").toString()
+
+        differentiateUsers()
         startFragments()
 
         postClicked()
-        differentiateUsers(post_layout)
 
     }
 
-    private fun differentiateUsers(v: View?)
+    private fun hide(v: View?)
     {
-        val sp: SharedPreferences? =this?.getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
-        val savedAndrewId:String?=sp?.getString("ANDREW_ID", null)
-        val savedRole:String?=sp?.getString("ROLE", null)
+        v?.isVisible=false
+    }
 
-        if(savedRole=="organizer")
-        {
-            v?.isVisible=false
-        }
+    private fun show(v: View?)
+    {
+        v?.isVisible=true
     }
 
     private fun postClicked()
@@ -71,6 +75,25 @@ class ViewQuestionsStudentActivity : AppCompatActivity() {
         transaction.setReorderingAllowed(true)
         transaction.add(com.example.speakout.R.id.view_towhalls_questions_student_fragment_id, fragment,null)
         transaction.commit()
+    }
+
+    private fun differentiateUsers() {
+        val sp: SharedPreferences? =this?.getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
+        val savedAndrewId:String?=sp?.getString("ANDREW_ID", null)
+        val savedRole:String?=sp?.getString("ROLE", null)
+
+        if(savedRole=="organizer")
+        {
+            show(view_questions)
+            hide(post_layout)
+//            hide(fragment_layout)
+        }
+        if(savedRole=="student")
+        {
+            show(post_layout)
+            show(fragment_layout)
+            hide(view_questions)
+        }
     }
 
 }

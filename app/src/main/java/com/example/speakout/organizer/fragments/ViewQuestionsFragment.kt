@@ -20,10 +20,11 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
 
-class ViewQuestionsFragment : Fragment() {
+class ViewQuestionsFragment : Fragment(), ReadQuestionAdapter.QuestionClickInterface {
     private var recycler: RecyclerView?=null;
     private var database:DatabaseReference?=null;
     private var townhall_id:String=""
+    private val all_questions:ArrayList<QuestionClass> = ArrayList();
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -52,7 +53,7 @@ class ViewQuestionsFragment : Fragment() {
                     var questions=snapshot.child("question").children
                     var users=snapshot.child("user")
                     var i=0
-                    val all_questions:ArrayList<QuestionClass> = ArrayList();
+
                     questions.forEach{
                         if(i!=0)
                         {
@@ -70,7 +71,7 @@ class ViewQuestionsFragment : Fragment() {
                         }
                         i++
                     }
-                    val adapter= ReadQuestionAdapter(all_questions);
+                    val adapter= ReadQuestionAdapter(all_questions, this@ViewQuestionsFragment);
                     recycler?.adapter=adapter
                 }
                 else
@@ -84,6 +85,10 @@ class ViewQuestionsFragment : Fragment() {
                 Toast.makeText(context, "Fail to get data.", Toast.LENGTH_SHORT).show()
             }
         })
+    }
+
+    override fun questionClicked(position: Int) {
+        Toast.makeText(context,"Clicked $position",Toast.LENGTH_LONG).show()
     }
 
 }

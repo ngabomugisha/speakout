@@ -52,8 +52,6 @@ class RecyclerViewTownHallAdapter(private var town_halls: ArrayList<TownHallView
                 listener.onItemClick(position)
             }
         }
-
-
     }
 
     interface OnItemCLickListener{
