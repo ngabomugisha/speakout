@@ -26,6 +26,7 @@ class ViewQuestionsFragment : Fragment(), ReadQuestionAdapter.QuestionClickInter
     private var database:DatabaseReference?=null;
     private var townhall_id:String=""
     private val all_questions:ArrayList<QuestionClass> = ArrayList();
+    private var adapter:ReadQuestionAdapter?=null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -73,38 +74,10 @@ class ViewQuestionsFragment : Fragment(), ReadQuestionAdapter.QuestionClickInter
                         }
                         i++
                     }
-                    val adapter= ReadQuestionAdapter(all_questions,this@ViewQuestionsFragment)
+                    adapter= ReadQuestionAdapter(all_questions,this@ViewQuestionsFragment)
 
                     recycler?.adapter=adapter
 
-                    val swipeUpvote = object : SwipeToUpvoteCallback(requireContext()){
-                        override fun onSwiped(
-                            viewHolder: RecyclerView.ViewHolder,
-                            direction: Int
-                        ) {
-                            adapter.upvoteQuestion(viewHolder.adapterPosition)
-                            // Using a content provider, vote
-                            val sp: SharedPreferences? =activity?.getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
-                            val savedAndrewId:String?=sp?.getString("ANDREW_ID", null)
-                            val savedRole:String?=sp?.getString("ROLE", null)
-                            if(savedRole=="student")
-                            {
-                                DatabaseConnection.databaseProvider().voteQuestion(
-                                    "$savedAndrewId",
-                                    "${all_questions.get(viewHolder.adapterPosition).getId()}",
-                                    1
-                                )
-                                Toast.makeText(context, "Voted", Toast.LENGTH_LONG).show()
-                            }
-                            else
-                            {
-                                Toast.makeText(context, "You are an organizer", Toast.LENGTH_LONG).show()
-                            }
-                        }
-                    }
-
-                    val touchHelper  = ItemTouchHelper(swipeUpvote)
-                        touchHelper.attachToRecyclerView(this@ViewQuestionsFragment.recycler)
                 }
                 else
                 {
@@ -122,6 +95,38 @@ class ViewQuestionsFragment : Fragment(), ReadQuestionAdapter.QuestionClickInter
     override fun questionOnClick(position: Int)
     {
         Toast.makeText(context,"flsfnsdgmszldgzsdf $position",Toast.LENGTH_LONG).show()
+    }
+
+    private fun questionOnSwipe()
+    {
+        val swipeUpvote = object : SwipeToUpvoteCallback(requireContext()){
+            override fun onSwiped(
+                viewHolder: RecyclerView.ViewHolder,
+                direction: Int
+            ) {
+                adapter?.upvoteQuestion(viewHolder.adapterPosition)
+                // Using a content provider, vote
+                val sp: SharedPreferences? =activity?.getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
+                val savedAndrewId:String?=sp?.getString("ANDREW_ID", null)
+                val savedRole:String?=sp?.getString("ROLE", null)
+                if(savedRole=="student")
+                {
+                    DatabaseConnection.databaseProvider().voteQuestion(
+                        "$savedAndrewId",
+                        "${all_questions.get(viewHolder.adapterPosition).getId()}",
+                        1
+                    )
+                    Toast.makeText(context, "Voted", Toast.LENGTH_LONG).show()
+                }
+                else
+                {
+                    Toast.makeText(context, "You are an organizer", Toast.LENGTH_LONG).show()
+                }
+            }
+        }
+
+        val touchHelper  = ItemTouchHelper(swipeUpvote)
+        touchHelper.attachToRecyclerView(this@ViewQuestionsFragment.recycler)
     }
 
 }
