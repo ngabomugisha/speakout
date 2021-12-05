@@ -25,14 +25,6 @@ class MainActivity : AppCompatActivity() {
         val savedAndrewId:String?=sp.getString("ANDREW_ID", null)
         val savedRole:String?=sp.getString("ROLE", null)
         checkPreferences()
-//        if(savedAndrewId!=null)
-//        {
-//            Toast.makeText(this, "AndrewId: $savedAndrewId, Role: $savedRole", Toast.LENGTH_SHORT).show()
-//        }
-//        else
-//        {
-//            Toast.makeText(this,"No session", Toast.LENGTH_SHORT).show()
-//        }
 
         val question=binding.question
         question.setOnClickListener {
@@ -57,10 +49,11 @@ class MainActivity : AppCompatActivity() {
         if(savedAndrewId!=null)
         {
             Toast.makeText(this,"$savedRole", Toast.LENGTH_SHORT).show()
-//            startActivity(DashboardFactory.decideDashboard(this,"$savedRole")?.goToDashboard())
+            startActivity(DashboardFactory.decideDashboard(this,"$savedRole")?.goToDashboard())
         }
         else
         {
+            Toast.makeText(this,"not saved", Toast.LENGTH_SHORT).show()
 //            startActivity(DashboardFactory.decideDashboard(this,"student")?.goToDashboard())
         }
     }
