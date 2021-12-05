@@ -38,7 +38,9 @@ class Fragment_comment : DialogFragment() {
     }
     private fun CreateComment ()
     {
-
+        btn_comment_sub?.setOnClickListener {
+            Toast.makeText(context,"sub Comment", Toast.LENGTH_LONG).show()
+        }
     }
 
 }
