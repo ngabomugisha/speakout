@@ -187,22 +187,17 @@ class ViewQuestionsFragment : Fragment(), ReadQuestionAdapter.QuestionClickInter
     //organizer_questions_recy_vw_id organizer_questions_recy_vw_id
     override fun questionOnClick(position: Int)
     {
-        DatabaseConnection.databaseProvider().voteQuestion(
-            "$savedAndrewId",
-            all_questions[position].getId(),
-            1
-        )
-        Toast.makeText(context, "Voted", Toast.LENGTH_LONG).show()
-    }
-
-    override fun questionOnLongClick(position: Int)
-    {
 //        DatabaseConnection.databaseProvider().voteQuestion(
 //            "$savedAndrewId",
 //            all_questions[position].getId(),
 //            1
 //        )
 //        Toast.makeText(context, "Voted", Toast.LENGTH_LONG).show()
+    }
+
+    override fun questionOnLongClick(position: Int)
+    {
+
     }
 
 }

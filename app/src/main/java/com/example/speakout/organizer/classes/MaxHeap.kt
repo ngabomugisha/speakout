@@ -89,12 +89,8 @@ class MaxHeap
         val s=length
         for(i in 1..i)
         {
-            val t=removeMax()
-            if(t.getId()!="NotFound")
-            {
-                out.add(removeMax())
-            }
-            if(i==s-1)
+            out.add(removeMax())
+            if(i==s)
             {
                 break
             }
