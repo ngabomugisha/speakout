@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import com.example.speakout.databinding.ActivityMainBinding
+import com.example.speakout.design_patterns.factory.DashboardFactory
 import com.example.speakout.general.activities.LoginActivity
 import com.example.speakout.general.activities.SignUpActivity
 import com.example.speakout.general.fragments.OrganizerOneTownHallActivity
@@ -23,14 +24,15 @@ class MainActivity : AppCompatActivity() {
         val sp: SharedPreferences =getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
         val savedAndrewId:String?=sp.getString("ANDREW_ID", null)
         val savedRole:String?=sp.getString("ROLE", null)
-        if(savedAndrewId!=null)
-        {
-            Toast.makeText(this, "AndrewId: $savedAndrewId, Role: $savedRole", Toast.LENGTH_SHORT).show()
-        }
-        else
-        {
-            Toast.makeText(this,"No session", Toast.LENGTH_SHORT).show()
-        }
+        checkPreferences()
+//        if(savedAndrewId!=null)
+//        {
+//            Toast.makeText(this, "AndrewId: $savedAndrewId, Role: $savedRole", Toast.LENGTH_SHORT).show()
+//        }
+//        else
+//        {
+//            Toast.makeText(this,"No session", Toast.LENGTH_SHORT).show()
+//        }
 
         val question=binding.question
         question.setOnClickListener {
@@ -47,7 +49,20 @@ class MainActivity : AppCompatActivity() {
             loginClicked()
         }
     }
-
+    private fun checkPreferences()
+    {
+        val sp: SharedPreferences =getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
+        val savedAndrewId:String?=sp.getString("ANDREW_ID", null)
+        val savedRole: String? =sp.getString("ROLE", null)
+        if(savedAndrewId!=null&&savedRole=="organizer")
+        {
+            startActivity(DashboardFactory.decideDashboard(this,"organizer")?.goToDashboard())
+        }
+        else
+        {
+            startActivity(DashboardFactory.decideDashboard(this,"student")?.goToDashboard())
+        }
+    }
     private fun loginClicked()
     {
         val intent:Intent= Intent(this,SignUpActivity::class.java)

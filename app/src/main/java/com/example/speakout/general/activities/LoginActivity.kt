@@ -54,8 +54,8 @@ class LoginActivity : AppCompatActivity() {
                 if(snapshot.exists())
                 {
                     val andrew_id:String = snapshot.child("andrew_id").value.toString()
-                    val fname:String= snapshot.child("firstname").value.toString()
-                    val lname:String= snapshot.child("lastname").value.toString()
+                    val fname:String= snapshot.child("firstName").value.toString()
+                    val lname:String= snapshot.child("lastName").value.toString()
                     val password:String=snapshot.child("password").value.toString()
                     val role:String=snapshot.child("role").value.toString()
 
@@ -64,14 +64,20 @@ class LoginActivity : AppCompatActivity() {
                     {
                         var user=User(andrew_id,password,fname,lname)
                         user.setRole(role)
+                        System.out.println("Role===>"+user.getAndrew())
+                        System.out.println("Password===>"+user.getPassword())
+                        System.out.println("First===>"+user.getFirstName())
+                        System.out.println("LastName===>"+user.getLastName())
 
+//                        Toast.makeText(this@LoginActivity, "AndrewId===>"+andrew+"<=====", Toast.LENGTH_SHORT).show()
                         val sharedPreferences: SharedPreferences =
                             getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
                         val editor: SharedPreferences.Editor = sharedPreferences.edit()
                         editor.apply {
-                            putString("ANDREW_ID", user?.getAndrew())
+                            putString("ANDREW_ID", andrew)
                             putString("ROLE",user?.getRole())
                         }.apply()
+                        Toast.makeText(this@LoginActivity, "[+]SAVED---AndrewId: "+andrew+"Role: "+user?.getRole(), Toast.LENGTH_SHORT).show()
 
                         startActivity(DashboardFactory.decideDashboard(this@LoginActivity,role)?.goToDashboard())
                     }

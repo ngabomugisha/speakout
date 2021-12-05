@@ -46,17 +46,6 @@ class SignUpActivity : AppCompatActivity() {
 
     }
 
-    private fun checkPreferences()
-    {
-        val sp: SharedPreferences =getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
-        val savedAndrewId:String?=sp.getString("ANDREW_ID", null)
-        val savedRole: String? =sp.getString("ROLE", null)
-        if(savedAndrewId!=null)
-        {
-            startActivity(DashboardFactory.decideDashboard(this,"organizer")?.goToDashboard())
-        }
-    }
-
     private fun signupBtnClicked()
     {
         val userId=andrew_id_signup.text.toString()
