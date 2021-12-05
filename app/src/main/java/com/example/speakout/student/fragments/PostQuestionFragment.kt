@@ -1,5 +1,7 @@
 package com.example.speakout.student.fragments
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -32,6 +34,7 @@ class PostQuestionFragment : DialogFragment()
     private var question: TextInputEditText?=null
     private var category:String?=null;
     private var count:Int=0
+    private var townhall_id:String=""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,6 +43,7 @@ class PostQuestionFragment : DialogFragment()
         // connect to the database
         database = DatabaseConnection.connect()
         provider= DatabaseConnection.databaseProvider()
+        townhall_id=activity?.intent?.getStringExtra("townhall_id").toString()
         // Inflate the layout for this fragment
         var rootView = inflater.inflate(R.layout.fragment_post_question, container, false)
         initializeButtons(rootView)
@@ -82,11 +86,14 @@ class PostQuestionFragment : DialogFragment()
             }
             else
             {
+                val sp: SharedPreferences? =activity?.getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
+                val savedAndrewId:String?=sp?.getString("ANDREW_ID", null)
                 val q: String? =question?.text.toString()
                 val date: String =Helper.changeDate(Helper.todayDate())
-                val saveQuestion: Question = Question("$date","001"
-                    ,"11-4-2021","$category","$q")
+                val saveQuestion: Question = Question("$date","$savedAndrewId"
+                    ,"$townhall_id","$category","$q")
                 saveQuestion.setId(count)
+                Toast.makeText(context,"$count",Toast.LENGTH_LONG).show()
                 saveQuestion.setParent(saveQuestion.getQuestionId())
                 provider?.insertQuestion(saveQuestion)
                 Toast.makeText(context,getString(R.string.success_msg),Toast.LENGTH_LONG).show()

@@ -39,7 +39,6 @@ class ViewQuestionsStudentActivity : AppCompatActivity() {
         view_questions=binding.aboveLayoutId
         fragment_layout=binding.fragmentLayoutId
 
-
         townhall_id= intent.getStringExtra("townhall_id").toString()
 
         differentiateUsers()
@@ -61,8 +60,11 @@ class ViewQuestionsStudentActivity : AppCompatActivity() {
     private fun postClicked()
     {
         post_btn.setOnClickListener {
-            var dialog = PostQuestionFragment()
-            dialog.show(supportFragmentManager, "DialogFragment")
+            var fragment = PostQuestionFragment()
+            var bundle:Bundle= Bundle()
+            bundle.putString("townhall_id",townhall_id)
+            fragment.arguments=bundle
+            fragment.show(supportFragmentManager, "DialogFragment")
         }
     }
 

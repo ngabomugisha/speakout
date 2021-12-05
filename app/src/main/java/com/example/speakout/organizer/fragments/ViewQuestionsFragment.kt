@@ -77,6 +77,7 @@ class ViewQuestionsFragment : Fragment(), ReadQuestionAdapter.QuestionClickInter
                     val adapter= ReadQuestionAdapter(all_questions,this@ViewQuestionsFragment)
 
                     recycler?.adapter=adapter
+                    adapter.notifyDataSetChanged()
 
                     val swipeUpvote = object : SwipeToUpvoteCallback(requireContext()){
                         override fun onSwiped(
