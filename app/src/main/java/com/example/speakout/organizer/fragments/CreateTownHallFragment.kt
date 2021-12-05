@@ -1,5 +1,7 @@
 package com.example.speakout.organizer.fragments
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -101,7 +103,11 @@ class CreateTownHallFragment : DialogFragment()
                 var id=Helper.changeDate(d)
                 d=Helper.changeDate(d)
 
-                val townhall: Townhall = Townhall(id,s,e,d,1,"001",det)
+                //preferences
+                val sp: SharedPreferences? =activity?.getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
+                val savedAndrewId:String?=sp?.getString("ANDREW_ID", null)
+
+                val townhall: Townhall = Townhall(id,s,e,d,1,"$savedAndrewId",det)
                 townhall.setCount(count)
                 // Inserting via a content provider
                 DatabaseConnection.databaseProvider().insertTownHall(townhall)
@@ -165,8 +171,4 @@ class CreateTownHallFragment : DialogFragment()
             clickDatePicker(view, "end")
         }
     }
-}
-
-private fun DatabaseReference?.addChildEventListener(valueEventListener: ValueEventListener) {
-
 }
