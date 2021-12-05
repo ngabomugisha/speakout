@@ -86,7 +86,7 @@ class LoginActivity : AppCompatActivity() {
                             putString("ANDREW_ID", andrew)
                             putString("ROLE",user?.getRole())
                         }.apply()
-                        Toast.makeText(this@LoginActivity, "[+]SAVED---AndrewId: "+andrew+"Role: "+user?.getRole(), Toast.LENGTH_SHORT).show()
+//                        Toast.makeText(this@LoginActivity, "[+]SAVED---AndrewId: "+andrew+"Role: "+user?.getRole(), Toast.LENGTH_SHORT).show()
 
                         startActivity(DashboardFactory.decideDashboard(this@LoginActivity,role)?.goToDashboard())
                     }
