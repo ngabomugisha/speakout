@@ -18,6 +18,7 @@ import com.example.speakout.organizer.recycler_views.ReadQuestionAdapter
 import com.example.speakout.content_provider.DatabaseConnection
 
 import com.example.speakout.organizer.classes.MaxHeap
+import com.example.speakout.organizer.recycler_views.SwipeToUpvoteCallback
 import com.example.speakout.utils.Helper
 
 import com.google.firebase.database.DataSnapshot
